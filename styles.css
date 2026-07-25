@@ -112,7 +112,7 @@ h3.disp{font-size:clamp(22px,2.4vw,30px);}
 }
 .nav{display:flex;align-items:center;gap:26px;height:84px;}
 .brand{display:flex;align-items:center;flex:none;}
-.brand img{height:58px;width:auto;background:var(--ink);border-radius:7px;padding:5px 10px;}
+.brand img{height:58px;width:auto;}
 .nav-links{display:flex;gap:30px;margin-left:24px;}
 .nav-links a{
   font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.08em;
@@ -249,7 +249,7 @@ h3.disp{font-size:clamp(22px,2.4vw,30px);}
 /* ---------- footer ---------- */
 .site-foot{background:var(--bg2);border-top:1px solid var(--line);padding:58px 0 30px;}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;}
-.foot-brand img{height:64px;margin-bottom:18px;background:var(--ink);border-radius:7px;padding:5px 10px;}
+.foot-brand img{height:64px;margin-bottom:18px;}
 .foot-brand p{color:var(--muted);font-size:15px;max-width:34ch;}
 .foot-col h4{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:14px;color:var(--brand);margin-bottom:16px;}
 .foot-col a,.foot-col span{display:block;color:var(--ink2);font-size:15px;padding:5px 0;transition:color .12s;}
@@ -321,7 +321,7 @@ h3.disp{font-size:clamp(22px,2.4vw,30px);}
   .burger{display:block;}
   .nav-cta{margin-left:auto;}
   .nav{height:72px;}
-  .brand img{height:48px;padding:4px 8px;}
+  .brand img{height:48px;}
 }
 @media(max-width:680px){
   .section{padding:60px 0;}
