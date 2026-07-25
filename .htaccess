@@ -28,9 +28,11 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# --- Redirect www to non-www (update domain below) ---
-# <IfModule mod_rewrite.c>
-#   RewriteEngine On
-#   RewriteCond %{HTTP_HOST} ^www\.wastemates\.com\.au [NC]
-#   RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
-# </IfModule>
+# --- Force HTTPS and redirect www to non-www (canonical host: wastemates.com.au) ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.wastemates\.com\.au [NC]
+  RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
+</IfModule>
