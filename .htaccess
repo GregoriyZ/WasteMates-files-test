@@ -36,3 +36,39 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP_HOST} ^www\.wastemates\.com\.au [NC]
   RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
 </IfModule>
+
+# --- Legacy WordPress URL redirects (old site, pre-rebuild) ---
+# Preserves any backlink/SEO equity pointing at the old site's URLs
+Redirect 301 /about-us/ /about.html
+Redirect 301 /contact-us/ /contact.html
+Redirect 301 /contact/ /contact.html
+Redirect 301 /faqs/ /faq.html
+Redirect 301 /get-quote/ /contact.html
+Redirect 301 /home/ /
+
+Redirect 301 /services/ /services.html
+Redirect 301 /services/household-rubbish-removal/ /services.html
+Redirect 301 /services/green-waste/ /services.html
+Redirect 301 /services/food-waste/ /services.html
+Redirect 301 /services/construction-waste-removalists/ /services.html
+Redirect 301 /services/body-corporate-real-estate/ /services.html
+Redirect 301 /services/renovations/ /services.html
+Redirect 301 /household-rubbish-removal/ /services.html
+Redirect 301 /green-waste-removal/ /services.html
+Redirect 301 /food-waste-removal/ /services.html
+Redirect 301 /construction-waste-removal/ /services.html
+Redirect 301 /body-corporate-real-estate/ /services.html
+Redirect 301 /renovations/ /services.html
+Redirect 301 /renovations-and-rubbish-removal/ /services.html
+Redirect 301 /garage-cleanups/ /services.html
+
+# Old blog — no equivalent section on the new site, send to home
+Redirect 301 /blog/ /
+Redirect 301 /category/general/ /
+Redirect 301 /decluttering-clearing-of-space-opens-that-space-to-place-home-and-a-sense-of-peace/ /
+Redirect 301 /get-ready-get-waste-mates-rubbish-removal-melbourne-say-goodbye-to-rubbish-and-procrastination/ /
+Redirect 301 /recycling-beyond-rhetoric-towards-a-valued-sustainable-resource/ /
+Redirect 301 /planning-your-rubbish-removal/ /
+Redirect 301 /the-art-of-kitchen-demolition/ /
+Redirect 301 /the-art-of-recycling-bricks/ /
+Redirect 301 /thinking-local-where-actions-become-global/ /
