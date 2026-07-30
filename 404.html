@@ -18,8 +18,10 @@
 <link rel="icon" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" />
-<link rel="stylesheet" href="styles.css?v=10" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" /></noscript>
+<link rel="stylesheet" href="styles.css?v=11" />
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -42,7 +44,7 @@
   <header class="site-head">
     <div class="wrap">
       <nav class="nav">
-        <a class="brand" href="index.html" aria-label="WasteMates home"><img src="assets/logo.png" alt="WasteMates" width="89" height="58" /></a>
+        <a class="brand" href="index.html" aria-label="WasteMates home"><picture><source srcset="assets/logo.webp" type="image/webp" /><img src="assets/logo.png" alt="WasteMates" width="89" height="58" /></picture></a>
         <div class="nav-links">
           <a href="index.html">Home</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="about.html">About</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
         </div>
