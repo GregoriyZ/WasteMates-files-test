@@ -3,8 +3,6 @@
    Light, energetic, electric-green. Anton display + Barlow body.
    =================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap');
-
 :root{
   --green:#61DE2A;
   --green-d:#4fbf1f;
@@ -255,7 +253,7 @@ h3.disp{font-size:clamp(22px,2.4vw,30px);}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;}
 .foot-brand img{height:64px;margin-bottom:18px;}
 .foot-brand p{color:var(--muted);font-size:15px;max-width:34ch;}
-.foot-col h4{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:14px;color:var(--brand);margin-bottom:16px;}
+.foot-col h3{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:14px;color:var(--brand);margin-bottom:16px;}
 .foot-col a,.foot-col span{display:block;color:var(--ink2);font-size:15px;padding:5px 0;transition:color .12s;}
 .foot-col a:hover{color:var(--brand);}
 .socials{display:flex;gap:12px;margin-top:8px;}
