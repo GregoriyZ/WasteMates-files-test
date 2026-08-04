@@ -176,6 +176,12 @@ require __DIR__ . '/lib/PHPMailer/SMTP.php';
 try {
     $mail = new PHPMailer\PHPMailer\PHPMailer(true);
     $mail->isSMTP();
+    // Short timeout so a blocked/unreachable SMTP port fails fast instead of
+    // hanging on PHPMailer's 300s default — Cloudflare gives the origin only
+    // 100s before returning 524, and Telegram/Discord notifications below
+    // still need their turn to run even if email can't get through.
+    $mail->Timeout = 10;
+    $mail->SMTPKeepAlive = false;
     $mail->Host = trim((string) $config['smtp_host']);
     $mail->SMTPAuth = true;
     $mail->Username = trim((string) $config['smtp_user']);
