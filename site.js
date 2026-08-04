@@ -167,8 +167,6 @@ function initMap() {
 
   // Wire up all three quote/enquiry forms (hero, contact, pricing).
   // Fires trackLead on submit with PII captured from the form fields.
-  // Uses sendBeacon under the hood so the relay request survives the page
-  // navigation that immediately follows the form POST to formsubmit.co.
   function bindFormEvents() {
     ['hero-quote-form', 'contact-form', 'pricing-form'].forEach(function (id) {
       var form = document.getElementById(id);
@@ -341,22 +339,77 @@ function initMap() {
     });
   }
 
-  // ─── Success banner ───────────────────────────────────────────────────────
+  // ─── Form status (loading / success / error) ───────────────────────────────
 
-  // Show success banner when redirected back after form submission (?sent=1).
-  // trackLead already fired on submit — we only show the UI confirmation here.
+  function setFormStatus(statusEl, state, text) {
+    if (!statusEl) return;
+    statusEl.className = 'form-status is-visible form-status--' + state;
+    var textEl = statusEl.querySelector('.form-status__text');
+    if (textEl) textEl.textContent = text;
+  }
+
+  // Show success banner when redirected back after a no-JS form submission
+  // (?sent=1) — the fallback path for browsers with JS disabled, since
+  // bindFormSubmission() below handles the normal case without a page reload.
   function handleFormSuccess() {
     if (window.location.search.indexOf('sent=1') === -1) return;
-    var banner = document.getElementById('form-success');
-    if (banner) {
-      banner.style.display = 'block';
-      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var statusEl = document.querySelector('.form-status');
+    if (statusEl) {
+      setFormStatus(statusEl, 'success', "Thanks — we'll be in touch soon!");
+      statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     // Clean the URL so a refresh doesn't re-show the banner
     if (window.history && window.history.replaceState) {
       var clean = window.location.pathname + window.location.hash;
       window.history.replaceState(null, '', clean);
     }
+  }
+
+  // Submit the quote/enquiry forms via fetch instead of a full page POST, so
+  // we can show a loading state while send-enquiry.php does its (several
+  // seconds long — it emails, then notifies Telegram and Discord) work,
+  // then confirm success in place rather than leaving the customer looking
+  // at a blank wait with no feedback.
+  function bindFormSubmission() {
+    ['hero-quote-form', 'contact-form', 'pricing-form'].forEach(function (id) {
+      var form = document.getElementById(id);
+      if (!form) return;
+      var statusEl = form.querySelector('.form-status');
+      var submitBtn = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (form.dataset.submitting === 'true') return;
+        form.dataset.submitting = 'true';
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.dataset.originalText = submitBtn.textContent;
+          submitBtn.textContent = 'Sending…';
+        }
+        setFormStatus(statusEl, 'sending', 'Sending your enquiry — this can take up to 15 seconds…');
+
+        fetch(form.action, { method: 'POST', body: new FormData(form) })
+          .then(function (response) {
+            if (response.ok && response.url.indexOf('sent=1') !== -1) {
+              setFormStatus(statusEl, 'success', "Thanks — we'll be in touch soon!");
+              form.reset();
+            } else {
+              throw new Error('Unexpected response');
+            }
+          })
+          .catch(function () {
+            setFormStatus(statusEl, 'error', 'Something went wrong sending that — please call us on 0494 013 254 instead.');
+          })
+          .finally(function () {
+            form.dataset.submitting = 'false';
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = submitBtn.dataset.originalText;
+            }
+          });
+      });
+    });
   }
 
   // ─── Sticky mobile CTA bar ────────────────────────────────────────────────
@@ -392,6 +445,7 @@ function initMap() {
     bindMenu();
     bindFaq();
     bindFormEvents();
+    bindFormSubmission();
     bindPhotoInputs();
     handleFormSuccess();
     bindMarquee();

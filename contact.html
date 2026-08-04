@@ -145,7 +145,7 @@
         <form class="form" action="/send-enquiry.php" method="post" id="contact-form" enctype="multipart/form-data">
           <h2 class="disp" style="font-size:30px;margin-bottom:6px;">Send an enquiry</h2>
           <p class="muted" style="margin-bottom:22px;">We usually reply within one business day.</p>
-          <div id="form-success" style="display:none;background:var(--green);color:#0a1303;padding:14px 18px;margin-bottom:18px;font-weight:600;">Thanks — we'll be in touch soon!</div>
+          <div class="form-status" role="status" aria-live="polite"><span class="form-spinner" aria-hidden="true"></span><span class="form-status__text"></span></div>
           <input type="hidden" name="_source" value="Contact page" />
           <input type="hidden" name="_redirect" value="contact.html" />
           <div style="display:none"><input type="text" name="_honey" tabindex="-1" autocomplete="off" /></div>
