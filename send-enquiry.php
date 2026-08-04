@@ -19,14 +19,14 @@ const MAX_TOTAL_BYTES = 15 * 1024 * 1024;  // 15MB combined, keeps the emailed
 const ALLOWED_MIMES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/heic', 'image/heif'];
 
 const ALLOWED_REDIRECTS = [
-    'index.html'   => '/index.html?sent=1',
-    'contact.html' => '/contact.html?sent=1',
-    'pricing.html' => '/pricing.html?sent=1',
+    'home'    => '/?sent=1',
+    'contact' => '/contact/?sent=1',
+    'pricing' => '/pricing/?sent=1',
 ];
 
 function redirect_to(string $key): void
 {
-    $target = ALLOWED_REDIRECTS[$key] ?? '/contact.html?sent=1';
+    $target = ALLOWED_REDIRECTS[$key] ?? '/contact/?sent=1';
     header('Location: ' . $target, true, 303);
     exit;
 }
@@ -38,11 +38,11 @@ function clean_field(string $value): string
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /contact.html', true, 303);
+    header('Location: /contact/', true, 303);
     exit;
 }
 
-$redirectKey = $_POST['_redirect'] ?? 'contact.html';
+$redirectKey = $_POST['_redirect'] ?? 'contact';
 
 // Honeypot — bots fill every field including hidden ones. Pretend success
 // so we don't tip them off, but do nothing further.

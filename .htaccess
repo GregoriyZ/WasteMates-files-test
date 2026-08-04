@@ -50,30 +50,37 @@ ErrorDocument 404 /404.html
   RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
 </IfModule>
 
+# --- Clean URL migration (flat .html pages -> directory-based clean URLs) ---
+# Preserves link equity from the previous flat-HTML site structure
+Redirect 301 /index.html /
+Redirect 301 /about.html /about/
+Redirect 301 /contact.html /contact/
+Redirect 301 /faq.html /faq/
+Redirect 301 /pricing.html /pricing/
+Redirect 301 /services.html /services/
+
 # --- Legacy WordPress URL redirects (old site, pre-rebuild) ---
 # Preserves any backlink/SEO equity pointing at the old site's URLs
-Redirect 301 /about-us/ /about.html
-Redirect 301 /contact-us/ /contact.html
-Redirect 301 /contact/ /contact.html
-Redirect 301 /faqs/ /faq.html
-Redirect 301 /get-quote/ /contact.html
+Redirect 301 /about-us/ /about/
+Redirect 301 /contact-us/ /contact/
+Redirect 301 /faqs/ /faq/
+Redirect 301 /get-quote/ /contact/
 Redirect 301 /home/ /
 
-Redirect 301 /services/ /services.html
-Redirect 301 /services/household-rubbish-removal/ /services.html
-Redirect 301 /services/green-waste/ /services.html
-Redirect 301 /services/food-waste/ /services.html
-Redirect 301 /services/construction-waste-removalists/ /services.html
-Redirect 301 /services/body-corporate-real-estate/ /services.html
-Redirect 301 /services/renovations/ /services.html
-Redirect 301 /household-rubbish-removal/ /services.html
-Redirect 301 /green-waste-removal/ /services.html
-Redirect 301 /food-waste-removal/ /services.html
-Redirect 301 /construction-waste-removal/ /services.html
-Redirect 301 /body-corporate-real-estate/ /services.html
-Redirect 301 /renovations/ /services.html
-Redirect 301 /renovations-and-rubbish-removal/ /services.html
-Redirect 301 /garage-cleanups/ /services.html
+Redirect 301 /services/household-rubbish-removal/ /services/rubbish-removal/
+Redirect 301 /services/green-waste/ /services/yard-clean-ups/
+Redirect 301 /services/food-waste/ /services/rubbish-removal/
+Redirect 301 /services/construction-waste-removalists/ /services/light-demolition/
+Redirect 301 /services/body-corporate-real-estate/ /services/
+Redirect 301 /services/renovations/ /services/light-demolition/
+Redirect 301 /household-rubbish-removal/ /services/rubbish-removal/
+Redirect 301 /green-waste-removal/ /services/yard-clean-ups/
+Redirect 301 /food-waste-removal/ /services/rubbish-removal/
+Redirect 301 /construction-waste-removal/ /services/light-demolition/
+Redirect 301 /body-corporate-real-estate/ /services/
+Redirect 301 /renovations/ /services/light-demolition/
+Redirect 301 /renovations-and-rubbish-removal/ /services/light-demolition/
+Redirect 301 /garage-cleanups/ /services/rubbish-removal/
 
 # Old blog — no equivalent section on the new site, send to home
 Redirect 301 /blog/ /
