@@ -9,3 +9,7 @@ screenshots/
 # OS
 .DS_Store
 Thumbs.db
+
+# Live secrets — generated at deploy time from GitHub Actions secrets,
+# see config.example.php for the template
+config.php

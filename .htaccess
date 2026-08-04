@@ -21,6 +21,19 @@ ErrorDocument 404 /404.html
   ExpiresByType application/javascript "access plus 1 week"
 </IfModule>
 
+# --- Enquiry form backend: block direct access to secrets/library files ---
+# (Belt-and-braces — config.php just returns a PHP array so PHP execution
+# alone already prevents leaking it, but this covers a misconfigured host.)
+<Files "config.php">
+  Require all denied
+</Files>
+<Files "config.example.php">
+  Require all denied
+</Files>
+<IfModule mod_alias.c>
+  RedirectMatch 403 ^/lib/
+</IfModule>
+
 # --- Security headers ---
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"

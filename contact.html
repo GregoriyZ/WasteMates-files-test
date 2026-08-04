@@ -142,13 +142,12 @@
           </div>
         </div>
 
-        <form class="form" action="https://formsubmit.co/info@wastemates.com.au" method="post" id="contact-form" enctype="multipart/form-data">
+        <form class="form" action="/send-enquiry.php" method="post" id="contact-form" enctype="multipart/form-data">
           <h2 class="disp" style="font-size:30px;margin-bottom:6px;">Send an enquiry</h2>
           <p class="muted" style="margin-bottom:22px;">We usually reply within one business day.</p>
           <div id="form-success" style="display:none;background:var(--green);color:#0a1303;padding:14px 18px;margin-bottom:18px;font-weight:600;">Thanks — we'll be in touch soon!</div>
-          <input type="hidden" name="_subject" value="New Enquiry — WasteMates Website" />
-          <input type="hidden" name="_next" value="https://wastemates.com.au/contact.html?sent=1" />
-          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_source" value="Contact page" />
+          <input type="hidden" name="_redirect" value="contact.html" />
           <div style="display:none"><input type="text" name="_honey" tabindex="-1" autocomplete="off" /></div>
           <div class="row">
             <div class="field"><label for="c-name">Name</label><input id="c-name" type="text" name="name" placeholder="Your name" /></div>
@@ -170,7 +169,7 @@
             <select id="c-job" name="job"><option>Not sure — you tell me</option><option>Rubbish removal</option><option>Tenant clean out</option><option>Yard clean up</option><option>Light demolition</option><option>Deceased estate</option><option>Hard &amp; bulky waste</option></select>
           </div>
           <div class="field"><label for="c-details">What needs removing?</label><textarea id="c-details" name="details" placeholder="Tell us what you've got — a couch, garden waste, a whole garage…"></textarea></div>
-          <div class="field"><label for="c-photos">Photos (optional)</label><input id="c-photos" type="file" name="attachment" accept="image/*" /></div>
+          <div class="field"><label for="c-photos">Photos (optional)</label><input id="c-photos" type="file" name="photos[]" accept="image/*" multiple /><div class="file-hint muted" style="font-size:12.5px;margin-top:4px;">You can select multiple photos at once.</div></div>
           <button type="submit" class="btn btn--green btn--lg btn--block">Send enquiry</button>
           <p class="muted" style="margin-top:14px;font-size:13.5px;text-align:center;">Or call <a class="green" href="tel:+61494013254">0494 013 254</a> for the fastest response.</p>
         </form>

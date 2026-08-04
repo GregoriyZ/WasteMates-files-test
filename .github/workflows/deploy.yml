@@ -12,6 +12,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Generate config.php
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          php -r '
+          $config = [
+              "smtp_host"   => trim((string) getenv("SMTP_HOST")),
+              "smtp_port"   => (int) trim((string) getenv("SMTP_PORT")),
+              "smtp_secure" => strtolower(trim((string) getenv("SMTP_SECURE"))),
+              "smtp_user"   => trim((string) getenv("SMTP_USER")),
+              "smtp_pass"   => getenv("SMTP_PASS"), // not trimmed, a password could legitimately have edge whitespace
+              "mail_to"     => trim((string) getenv("MAIL_TO")),
+              "mail_from"   => trim((string) getenv("MAIL_FROM")),
+              "from_name"   => "WasteMates Website",
+              "telegram_bot_token" => trim((string) getenv("TELEGRAM_BOT_TOKEN")),
+              "telegram_chat_id"   => trim((string) getenv("TELEGRAM_CHAT_ID")),
+              "discord_webhook_url" => trim((string) getenv("DISCORD_WEBHOOK_URL")),
+          ];
+          file_put_contents("config.php", "<?php\nreturn " . var_export($config, true) . ";\n");
+          '
+
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

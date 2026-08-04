@@ -289,6 +289,58 @@ function initMap() {
     });
   }
 
+  // ─── Multi-photo picker: filename preview + client-side limit checks ──────
+
+  // Mirrors the limits enforced server-side in send-enquiry.php so users see
+  // a clear inline message instead of silently losing a photo on submit.
+  var MAX_PHOTOS = 8;
+  var MAX_PHOTO_BYTES = 6 * 1024 * 1024;
+  var MAX_TOTAL_BYTES = 15 * 1024 * 1024;
+
+  function describePhotoError(files) {
+    if (files.length > MAX_PHOTOS) {
+      return 'Please select at most ' + MAX_PHOTOS + ' photos (you selected ' + files.length + ').';
+    }
+    var total = 0;
+    for (var i = 0; i < files.length; i++) {
+      if (files[i].size > MAX_PHOTO_BYTES) {
+        return '"' + files[i].name + '" is over 6MB — please use a smaller photo.';
+      }
+      total += files[i].size;
+    }
+    if (total > MAX_TOTAL_BYTES) {
+      return 'Those photos add up to more than 15MB combined — please remove a few.';
+    }
+    return null;
+  }
+
+  function bindPhotoInputs() {
+    document.querySelectorAll('input[type="file"][name="photos[]"]').forEach(function (input) {
+      var hint = input.parentNode.querySelector('.file-hint');
+      var defaultHint = hint ? hint.textContent : '';
+
+      input.addEventListener('change', function () {
+        var files = input.files;
+        var error = files.length ? describePhotoError(files) : null;
+        input.setCustomValidity(error || '');
+
+        if (!hint) return;
+
+        if (error) {
+          hint.textContent = error;
+          hint.style.color = '#c0392b';
+        } else if (files.length) {
+          var names = Array.prototype.map.call(files, function (f) { return f.name; });
+          hint.textContent = files.length + ' photo' + (files.length > 1 ? 's' : '') + ' selected: ' + names.join(', ');
+          hint.style.color = '';
+        } else {
+          hint.textContent = defaultHint;
+          hint.style.color = '';
+        }
+      });
+    });
+  }
+
   // ─── Success banner ───────────────────────────────────────────────────────
 
   // Show success banner when redirected back after form submission (?sent=1).
@@ -340,6 +392,7 @@ function initMap() {
     bindMenu();
     bindFaq();
     bindFormEvents();
+    bindPhotoInputs();
     handleFormSuccess();
     bindMarquee();
     injectStickyCta();    // must come before bindPhoneEvents/bindCtaEvents

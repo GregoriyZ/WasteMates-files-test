@@ -166,11 +166,10 @@
             <div><div class="lbl">Prefer to call?</div><a class="val" href="tel:+61494013254">0494 013 254</a></div>
           </div>
         </div>
-        <form class="form" action="https://formsubmit.co/info@wastemates.com.au" method="post" id="pricing-form" enctype="multipart/form-data">
+        <form class="form" action="/send-enquiry.php" method="post" id="pricing-form" enctype="multipart/form-data">
           <div id="form-success" style="display:none;background:var(--green);color:#0a1303;padding:14px 18px;margin-bottom:18px;font-weight:600;">Thanks — we'll be in touch soon!</div>
-          <input type="hidden" name="_subject" value="New Enquiry — WasteMates Website" />
-          <input type="hidden" name="_next" value="https://wastemates.com.au/pricing.html?sent=1" />
-          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_source" value="Pricing page" />
+          <input type="hidden" name="_redirect" value="pricing.html" />
           <div style="display:none"><input type="text" name="_honey" tabindex="-1" autocomplete="off" /></div>
           <div class="row">
             <div class="field"><label for="p-name">Name</label><input id="p-name" type="text" name="name" placeholder="Your name" /></div>
@@ -192,7 +191,7 @@
             <select id="p-job" name="job"><option>Not sure — you tell me</option><option>Rubbish removal</option><option>Tenant clean out</option><option>Yard clean up</option><option>Light demolition</option><option>Deceased estate</option><option>Hard &amp; bulky waste</option></select>
           </div>
           <div class="field"><label for="p-details">What needs removing?</label><textarea id="p-details" name="details" placeholder="e.g. a couch, an old fridge and a few bags of garden waste"></textarea></div>
-          <div class="field"><label for="p-photos">Photos (optional)</label><input id="p-photos" type="file" name="attachment" accept="image/*" /></div>
+          <div class="field"><label for="p-photos">Photos (optional)</label><input id="p-photos" type="file" name="photos[]" accept="image/*" multiple /><div class="file-hint muted" style="font-size:12.5px;margin-top:4px;">You can select multiple photos at once.</div></div>
           <button type="submit" class="btn btn--green btn--lg btn--block">Send my enquiry</button>
         </form>
       </div>
