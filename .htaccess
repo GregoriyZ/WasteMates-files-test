@@ -59,13 +59,13 @@ Redirect 301 /faqs/ /faq.html
 Redirect 301 /get-quote/ /contact.html
 Redirect 301 /home/ /
 
-Redirect 301 /services/ /services.html
 Redirect 301 /services/household-rubbish-removal/ /services.html
 Redirect 301 /services/green-waste/ /services.html
 Redirect 301 /services/food-waste/ /services.html
 Redirect 301 /services/construction-waste-removalists/ /services.html
 Redirect 301 /services/body-corporate-real-estate/ /services.html
 Redirect 301 /services/renovations/ /services.html
+Redirect 301 /services/ /services.html
 Redirect 301 /household-rubbish-removal/ /services.html
 Redirect 301 /green-waste-removal/ /services.html
 Redirect 301 /food-waste-removal/ /services.html
