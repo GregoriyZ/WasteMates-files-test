@@ -31,11 +31,21 @@
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "https://wastemates.com.au/#business",
   "name": "WasteMates",
   "image": "https://wastemates.com.au/assets/ph-crew.jpg",
+  "logo": "https://wastemates.com.au/assets/logo.png",
   "url": "https://wastemates.com.au/",
   "telephone": "+61494013254",
   "email": "info@wastemates.com.au",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+61494013254",
+    "contactType": "customer service",
+    "email": "info@wastemates.com.au",
+    "areaServed": "AU",
+    "availableLanguage": "English"
+  },
   "priceRange": "$$",
   "description": "Melbourne's fast, friendly rubbish removal crew. We do the heavy lifting so you don't have to.",
   "address": {
@@ -44,15 +54,106 @@
     "addressRegion": "VIC",
     "addressCountry": "AU"
   },
-  "areaServed": {
-    "@type": "City",
-    "name": "Melbourne"
+  "areaServed": [
+    { "@type": "City", "name": "Melbourne" },
+    { "@type": "AdministrativeArea", "name": "Melbourne CBD" },
+    { "@type": "AdministrativeArea", "name": "Inner North Melbourne" },
+    { "@type": "AdministrativeArea", "name": "Eastern Suburbs Melbourne" },
+    { "@type": "AdministrativeArea", "name": "Bayside Melbourne" },
+    { "@type": "AdministrativeArea", "name": "Western Suburbs Melbourne" },
+    { "@type": "AdministrativeArea", "name": "South-Eastern Suburbs Melbourne" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Rubbish Removal Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Rubbish Removal",
+          "description": "Household, commercial and general junk cleared in a single trip — bags, boxes, furniture and everything in between. We do all the loading and the tip runs.",
+          "areaServed": { "@type": "City", "name": "Melbourne" },
+          "provider": { "@id": "https://wastemates.com.au/#business" }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Tenant Clean Outs",
+          "description": "End-of-lease and vacate clean-outs done fast — get your bond back and the keys handed over without the stress. Ideal for renters, agents and property managers.",
+          "areaServed": { "@type": "City", "name": "Melbourne" },
+          "provider": { "@id": "https://wastemates.com.au/#business" }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Yard Clean Ups",
+          "description": "Overgrown gardens, prunings, clippings, soil and storm debris cleared out — we'll leave your yard neat and tidy and divert green waste to mulch where we can.",
+          "areaServed": { "@type": "City", "name": "Melbourne" },
+          "provider": { "@id": "https://wastemates.com.au/#business" }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Light Demolition",
+          "description": "Fences, sheds, pergolas and decking knocked down and hauled away — debris removed and the site swept clean, ready for whatever comes next.",
+          "areaServed": { "@type": "City", "name": "Melbourne" },
+          "provider": { "@id": "https://wastemates.com.au/#business" }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Deceased Estates",
+          "description": "Respectful, discreet estate clear-outs handled with care and the flexibility families need during a difficult time. We can donate and recycle on your behalf.",
+          "areaServed": { "@type": "City", "name": "Melbourne" },
+          "provider": { "@id": "https://wastemates.com.au/#business" }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hard & Bulky Waste",
+          "description": "Old lounges, mattresses, fridges and washing machines lifted out and hauled away — no item too heavy or awkward, and no stairs too tricky.",
+          "areaServed": { "@type": "City", "name": "Melbourne" },
+          "provider": { "@id": "https://wastemates.com.au/#business" }
+        }
+      }
+    ]
   },
   "sameAs": [
     "https://www.facebook.com/profile.php?id=61590875721966",
     "https://www.instagram.com/thewastemates",
     "https://www.tiktok.com/@waste.mates",
     "https://www.youtube.com/channel/UCgyg5UkjtcxHfCFO2t0xwRA"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://wastemates.com.au/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Services",
+      "item": "https://wastemates.com.au/services.html"
+    }
   ]
 }
 </script>
