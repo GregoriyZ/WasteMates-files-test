@@ -19,11 +19,7 @@ jobs:
 
       - name: Generate config.php
         env:
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
           MAIL_FROM: ${{ secrets.MAIL_FROM }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -32,11 +28,7 @@ jobs:
         run: |
           php -r '
           $config = [
-              "smtp_host"   => trim((string) getenv("SMTP_HOST")),
-              "smtp_port"   => (int) trim((string) getenv("SMTP_PORT")),
-              "smtp_secure" => strtolower(trim((string) getenv("SMTP_SECURE"))),
-              "smtp_user"   => trim((string) getenv("SMTP_USER")),
-              "smtp_pass"   => getenv("SMTP_PASS"), // not trimmed, a password could legitimately have edge whitespace
+              "resend_api_key" => trim((string) getenv("RESEND_API_KEY")),
               "mail_to"     => trim((string) getenv("MAIL_TO")),
               "mail_from"   => trim((string) getenv("MAIL_FROM")),
               "from_name"   => "WasteMates Website",

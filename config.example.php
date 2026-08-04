@@ -5,18 +5,17 @@
 // Actions deploy workflow from repo secrets (see .github/workflows/deploy.yml).
 
 return [
-    // Gmail / Google Workspace SMTP for info@wastemates.com.au.
-    // smtp_pass must be a 16-character Google App Password, NOT the normal
-    // account login password — Google blocks plain-password SMTP login.
-    // Generate one at https://myaccount.google.com/apppasswords (needs
-    // 2-Step Verification turned on for the account first).
-    'smtp_host'   => 'smtp.gmail.com',
-    'smtp_port'   => 587,
-    'smtp_secure' => 'tls', // 'ssl' or 'tls'
-    'smtp_user'   => 'info@wastemates.com.au',
-    'smtp_pass'   => '',
+    // Resend (https://resend.com) — sends over HTTPS, not SMTP. GoDaddy
+    // shared hosting blocks outbound SMTP ports entirely (confirmed by
+    // testing), so a raw SMTP mailbox can never work from this host.
+    // Get an API key from https://resend.com/api-keys after verifying
+    // wastemates.com.au as a sending domain (Resend → Domains → Add Domain
+    // → add the DNS records it gives you).
+    'resend_api_key' => '',
 
-    // Where enquiry emails are sent to/from.
+    // Where enquiry emails are sent to/from. mail_from must be an address
+    // on the domain verified with Resend (e.g. info@wastemates.com.au once
+    // wastemates.com.au is verified).
     'mail_to'     => 'info@wastemates.com.au',
     'mail_from'   => 'info@wastemates.com.au',
     'from_name'   => 'WasteMates Website',

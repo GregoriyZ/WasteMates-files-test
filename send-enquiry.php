@@ -3,9 +3,9 @@
  * WasteMates enquiry handler.
  *
  * Replaces formsubmit.co: accepts the hero/contact/pricing forms, emails the
- * enquiry (with however many photos were attached) via the GoDaddy mailbox,
- * and pushes an instant Telegram notification to the owner so a lead never
- * sits unseen in an inbox.
+ * enquiry (with however many photos were attached) via the Resend API, and
+ * pushes instant Telegram + Discord notifications to the owner so a lead
+ * never sits unseen in an inbox.
  */
 
 declare(strict_types=1);
@@ -168,48 +168,69 @@ if (!empty($uploadNotes)) {
     $htmlBody .= '<p style="margin-top:14px;color:#a33;">' . implode('<br>', array_map('htmlspecialchars', $uploadNotes)) . '</p>';
 }
 
+// Sent over HTTPS via the Resend API rather than raw SMTP — GoDaddy shared
+// hosting blocks outbound SMTP ports entirely (confirmed: every attempt
+// timed out connecting to smtp.gmail.com:587), so plain SMTP can never work
+// from this host regardless of credentials.
+function resend_send_email(string $apiKey, string $from, string $to, ?string $replyTo, string $subject, string $html, string $text, array $attachments): array
+{
+    $payload = [
+        'from'    => $from,
+        'to'      => [$to],
+        'subject' => $subject,
+        'html'    => $html,
+        'text'    => $text,
+    ];
+    if ($replyTo !== null) {
+        $payload['reply_to'] = $replyTo;
+    }
+    if (!empty($attachments)) {
+        $payload['attachments'] = array_map(function ($a) {
+            return [
+                'filename' => $a['name'],
+                'content'  => base64_encode((string) file_get_contents($a['tmp'])),
+            ];
+        }, $attachments);
+    }
+
+    $ch = curl_init('https://api.resend.com/emails');
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => [
+            'Authorization: Bearer ' . $apiKey,
+            'Content-Type: application/json',
+        ],
+        CURLOPT_POSTFIELDS => json_encode($payload),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 20,
+    ]);
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    return ['success' => $httpCode >= 200 && $httpCode < 300, 'http_code' => $httpCode, 'response' => $response];
+}
+
 $emailSent = false;
-require __DIR__ . '/lib/PHPMailer/Exception.php';
-require __DIR__ . '/lib/PHPMailer/PHPMailer.php';
-require __DIR__ . '/lib/PHPMailer/SMTP.php';
+$fromAddress = $config['from_name'] ?? 'WasteMates Website';
+$fromAddress .= ' <' . $config['mail_from'] . '>';
+$replyTo = ($fields['email'] !== '' && filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) ? $fields['email'] : null;
 
-try {
-    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-    $mail->isSMTP();
-    // Short timeout so a blocked/unreachable SMTP port fails fast instead of
-    // hanging on PHPMailer's 300s default — Cloudflare gives the origin only
-    // 100s before returning 524, and Telegram/Discord notifications below
-    // still need their turn to run even if email can't get through.
-    $mail->Timeout = 10;
-    $mail->SMTPKeepAlive = false;
-    $mail->Host = trim((string) $config['smtp_host']);
-    $mail->SMTPAuth = true;
-    $mail->Username = trim((string) $config['smtp_user']);
-    $mail->Password = $config['smtp_pass']; // not trimmed — a password could legitimately start/end with a space
-    $mail->SMTPSecure = strtolower(trim((string) ($config['smtp_secure'] ?? 'ssl'))) === 'tls'
-        ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS
-        : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port = (int) trim((string) ($config['smtp_port'] ?? 465));
+$emailResult = resend_send_email(
+    (string) $config['resend_api_key'],
+    $fromAddress,
+    $config['mail_to'],
+    $replyTo,
+    $subject,
+    $htmlBody,
+    implode("\n", $textLines),
+    $attachments
+);
 
-    $mail->setFrom($config['mail_from'], $config['from_name'] ?? 'WasteMates Website');
-    $mail->addAddress($config['mail_to']);
-    if ($fields['email'] !== '' && filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) {
-        $mail->addReplyTo($fields['email'], $fields['name'] !== '' ? $fields['name'] : $fields['email']);
-    }
-
-    foreach ($attachments as $a) {
-        $mail->addAttachment($a['tmp'], $a['name']);
-    }
-
-    $mail->Subject = $subject;
-    $mail->isHTML(true);
-    $mail->Body = $htmlBody;
-    $mail->AltBody = implode("\n", $textLines);
-
-    $mail->send();
+if ($emailResult['success']) {
     $emailSent = true;
-} catch (\Throwable $e) {
-    error_log('WasteMates enquiry email failed: ' . $e->getMessage());
+} else {
+    error_log('WasteMates enquiry email failed (HTTP ' . $emailResult['http_code'] . '): ' . $emailResult['response']);
 }
 
 // ── Telegram notification ───────────────────────────────────────────────────
