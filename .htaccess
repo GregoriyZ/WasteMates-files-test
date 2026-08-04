@@ -61,19 +61,19 @@ Redirect 301 /home/ /
 
 Redirect 301 /services/ /services.html
 Redirect 301 /services/household-rubbish-removal/ /services.html
-Redirect 301 /services/green-waste/ /services.html
-Redirect 301 /services/food-waste/ /services.html
-Redirect 301 /services/construction-waste-removalists/ /services.html
-Redirect 301 /services/body-corporate-real-estate/ /services.html
-Redirect 301 /services/renovations/ /services.html
+Redirect 301 /services/green-waste/ /green-waste-removal.html
+Redirect 301 /services/food-waste/ /green-waste-removal.html
+Redirect 301 /services/construction-waste-removalists/ /construction-waste-removal.html
+Redirect 301 /services/body-corporate-real-estate/ /body-corporate-real-estate.html
+Redirect 301 /services/renovations/ /renovation-waste-removal.html
 Redirect 301 /household-rubbish-removal/ /services.html
-Redirect 301 /green-waste-removal/ /services.html
-Redirect 301 /food-waste-removal/ /services.html
-Redirect 301 /construction-waste-removal/ /services.html
-Redirect 301 /body-corporate-real-estate/ /services.html
-Redirect 301 /renovations/ /services.html
-Redirect 301 /renovations-and-rubbish-removal/ /services.html
-Redirect 301 /garage-cleanups/ /services.html
+Redirect 301 /green-waste-removal/ /green-waste-removal.html
+Redirect 301 /food-waste-removal/ /green-waste-removal.html
+Redirect 301 /construction-waste-removal/ /construction-waste-removal.html
+Redirect 301 /body-corporate-real-estate/ /body-corporate-real-estate.html
+Redirect 301 /renovations/ /renovation-waste-removal.html
+Redirect 301 /renovations-and-rubbish-removal/ /renovation-waste-removal.html
+Redirect 301 /garage-cleanups/ /garage-shed-cleanouts.html
 
 # Old blog — no equivalent section on the new site, send to home
 Redirect 301 /blog/ /
