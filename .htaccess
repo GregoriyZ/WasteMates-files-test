@@ -42,15 +42,14 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 # --- Redirect www to non-www (canonical host: wastemates.com.au) ---
-# The origin-side force-HTTPS rewrite that used to live here is REMOVED:
-# this site sits behind Cloudflare (Flexible-SSL), which terminates TLS
-# with the visitor but connects to this origin over plain HTTP, so
-# %{HTTPS} is always "off" here even for a real HTTPS visitor. Checking
-# X-Forwarded-Proto instead did not fix it either (2026-08-05 outage),
-# so the rule was dropped entirely rather than left to loop again —
-# Cloudflare already serves HTTPS to every visitor at the edge regardless.
-# If HTTPS enforcement needs to happen again, do it in Cloudflare's
-# dashboard (Always Use HTTPS / Edge Certificates), not here.
+# The origin-side force-HTTPS rewrite that used to live here is REMOVED —
+# it was never actually the cause of the 2026-08-05 outage (confirmed: the
+# loop persists byte-for-byte identically even with Cloudflare's proxy
+# bypassed entirely via DNS, hitting the GoDaddy origin directly). The
+# real cause of the "/" and "/services/" loops is still unidentified —
+# nothing in this file, cPanel, or Cloudflare's dashboard (Page Rules,
+# Redirect Rules, Bulk Redirects, Workers) explains it. Left removed since
+# re-adding it never helped and risks reintroducing a loop on its own.
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTP_HOST} ^www\.wastemates\.com\.au [NC]
@@ -64,7 +63,12 @@ Redirect 301 /about.html /about/
 Redirect 301 /contact.html /contact/
 Redirect 301 /faq.html /faq/
 Redirect 301 /pricing.html /pricing/
-Redirect 301 /services.html /services/
+# NOTE: no "/services.html -> /services/" rule here on purpose. Something
+# outside this repo's control already redirects /services/ -> services.html
+# (root cause unknown — see WORKAROUND note on the services.html file
+# itself). Redirecting services.html back to /services/ here would recreate
+# that exact infinite loop. services.html is instead a real, standalone
+# page (not a redirect) so that bounce terminates instead of looping.
 
 # --- Legacy WordPress URL redirects (old site, pre-rebuild) ---
 # Preserves any backlink/SEO equity pointing at the old site's URLs
