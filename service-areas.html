@@ -342,34 +342,46 @@
     </div>
   </section>
 
+  <!-- SUBURB SEARCH -->
+  <section class="section tight" data-screen-label="Suburb search">
+    <div class="wrap">
+      <div class="shead"><p class="kicker">Find your suburb</p><h2 class="disp">How far are we from you?</h2></div>
+      <div class="suburb-search">
+        <input type="text" id="suburb-search-input" placeholder="Type your suburb, e.g. Lilydale" autocomplete="off" aria-label="Search your suburb" />
+        <svg class="search-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <div class="suburb-results" id="suburb-results"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- REGIONS -->
   <section class="section tread" data-screen-label="Service areas by region">
     <div class="wrap">
       <div class="shead"><p class="kicker">Core area</p><h2 class="disp">Fastest response, most days</h2></div>
-      <div class="why-grid">
-        <div class="why-item">
-          <h3>Home Base</h3>
-          <a class="green" href="rubbish-removal-mooroolbark.html">Mooroolbark</a><br/>
-          <a class="green" href="rubbish-removal-chirnside-park.html">Chirnside Park</a><br/>
-          <a class="green" href="rubbish-removal-lilydale.html">Lilydale</a><br/>
+      <div class="areas-grid-core">
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Home Base</h3>
+          <a class="green" href="rubbish-removal-mooroolbark.html">Mooroolbark</a>
+          <a class="green" href="rubbish-removal-chirnside-park.html">Chirnside Park</a>
+          <a class="green" href="rubbish-removal-lilydale.html">Lilydale</a>
         </div>
-        <div class="why-item">
-          <h3>Maroondah</h3>
-          <a class="green" href="rubbish-removal-croydon.html">Croydon</a><br/>
-          <a class="green" href="rubbish-removal-croydon-north.html">Croydon North</a><br/>
-          <a class="green" href="rubbish-removal-croydon-hills.html">Croydon Hills</a><br/>
-          <a class="green" href="rubbish-removal-ringwood-east.html">Ringwood East</a><br/>
-          <a class="green" href="rubbish-removal-heathmont.html">Heathmont</a><br/>
-          <a class="green" href="rubbish-removal-bayswater-north.html">Bayswater North</a><br/>
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Maroondah</h3>
+          <a class="green" href="rubbish-removal-croydon.html">Croydon</a>
+          <a class="green" href="rubbish-removal-croydon-north.html">Croydon North</a>
+          <a class="green" href="rubbish-removal-croydon-hills.html">Croydon Hills</a>
+          <a class="green" href="rubbish-removal-ringwood-east.html">Ringwood East</a>
+          <a class="green" href="rubbish-removal-heathmont.html">Heathmont</a>
+          <a class="green" href="rubbish-removal-bayswater-north.html">Bayswater North</a>
         </div>
-        <div class="why-item">
-          <h3>Yarra Ranges</h3>
-          <a class="green" href="rubbish-removal-kilsyth.html">Kilsyth</a><br/>
-          <a class="green" href="rubbish-removal-kilsyth-south.html">Kilsyth South</a><br/>
-          <a class="green" href="rubbish-removal-montrose.html">Montrose</a><br/>
-          <a class="green" href="rubbish-removal-mount-evelyn.html">Mount Evelyn</a><br/>
-          <a class="green" href="rubbish-removal-wonga-park.html">Wonga Park</a><br/>
-          <a class="green" href="rubbish-removal-coldstream.html">Coldstream</a><br/>
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Yarra Ranges</h3>
+          <a class="green" href="rubbish-removal-kilsyth.html">Kilsyth</a>
+          <a class="green" href="rubbish-removal-kilsyth-south.html">Kilsyth South</a>
+          <a class="green" href="rubbish-removal-montrose.html">Montrose</a>
+          <a class="green" href="rubbish-removal-mount-evelyn.html">Mount Evelyn</a>
+          <a class="green" href="rubbish-removal-wonga-park.html">Wonga Park</a>
+          <a class="green" href="rubbish-removal-coldstream.html">Coldstream</a>
         </div>
       </div>
     </div>
@@ -380,25 +392,25 @@
     <div class="wrap">
       <div class="shead"><p class="kicker">Further out</p><h2 class="disp">Extended coverage, by drive time</h2></div>
       <p class="lead" style="margin-top:10px;">We're based in Mooroolbark, so response times get longer the further out you are &mdash; but for the right job, we'll travel. Approximate drive times from our depot:</p>
-      <div class="why-grid" style="margin-top:22px;">
-        <div class="why-item">
-          <h3>Nearby (15–30 min)</h3>
+      <div class="areas-grid-ext" style="margin-top:22px;">
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Nearby (15&ndash;30 min)</h3>
           <p class="muted">Warranwood, Ringwood North, Ringwood, Croydon South, Bayswater, The Basin, Boronia, Wantirna, Sassafras, Kalorama, Silvan, Wandin North, Park Orchards</p>
         </div>
-        <div class="why-item">
-          <h3>Wider outer east (25–45 min)</h3>
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Wider outer east (25&ndash;45 min)</h3>
           <p class="muted">Mitcham, Nunawading, Blackburn North, Vermont, Blackburn, Vermont South, Forest Hill, Blackburn South, Belgrave, Tecoma, Upwey, Selby, Monbulk, Mount Dandenong, Ferny Creek</p>
         </div>
-        <div class="why-item">
-          <h3>Knox &amp; eastern suburbs (30–50 min)</h3>
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Knox &amp; eastern suburbs (30&ndash;50 min)</h3>
           <p class="muted">Wantirna South, Knoxfield, Ferntree Gully, Upper Ferntree Gully, Scoresby, Lysterfield, Rowville, Glen Waverley, Wheelers Hill, Mount Waverley, Burwood East, Box Hill North, Box Hill, Box Hill South, Doncaster East, Doncaster, Templestowe, Templestowe Lower, Bulleen, Surrey Hills, Mont Albert North, Mont Albert, Balwyn North, Balwyn, Camberwell, Ashburton, Burwood, Chadstone, Malvern East, Oakleigh East</p>
         </div>
-        <div class="why-item">
-          <h3>South-east Melbourne (45–65 min)</h3>
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>South-east Melbourne (45&ndash;65 min)</h3>
           <p class="muted">Oakleigh, Huntingdale, Notting Hill, Clayton, Clayton South, Mulgrave, Noble Park North, Springvale, Springvale South, Noble Park, Dandenong North, Dandenong, Keysborough, Dandenong South, Bangholme, Hallam, Endeavour Hills, Narre Warren North, Narre Warren, Narre Warren South, Berwick, Beaconsfield, Officer, Beaconsfield Upper, Pakenham, Cranbourne North, Cranbourne West, Cranbourne, Cranbourne East, Clyde North</p>
         </div>
-        <div class="why-item">
-          <h3>Bayside &amp; extended range — bigger jobs only (60–90 min)</h3>
+        <div class="area-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Bayside &amp; extended range (60&ndash;90 min)</h3>
           <p class="muted">Clyde, Junction Village, Lynbrook, Lyndhurst, Hampton Park, Skye, Carrum Downs, Seaford, Frankston, Frankston South, Langwarrin, Patterson Lakes, Carrum, Bonbeach, Chelsea, Edithvale, Aspendale, Mordialloc, Parkdale, Mentone, Cheltenham, Heatherton, Dingley Village, Moorabbin Airport, Moorabbin, Highett, Hampton East, Hampton, Sandringham, Black Rock, Brighton, Brighton East, Bentleigh, Bentleigh East, McKinnon, Ormond, Carnegie, Murrumbeena, Hughesdale, Caulfield, Caulfield North, Caulfield South, Elsternwick, Gardenvale, Ripponlea</p>
         </div>
       </div>
@@ -449,5 +461,39 @@
   </footer>
 
   <script src="site.js?v=10"></script>
+  <script>
+  (function() {
+    var SUBURBS = [['Mooroolbark','0 min'],['Chirnside Park','5–8 min'],['Lilydale','6–10 min'],['Kilsyth','6–10 min'],['Kilsyth South','8–12 min'],['Montrose','8–12 min'],['Mount Evelyn','8–12 min'],['Croydon','10–15 min'],['Croydon North','10–15 min'],['Croydon Hills','10–15 min'],['Wonga Park','12–18 min'],['Coldstream','12–18 min'],['Ringwood East','15–20 min'],['Heathmont','18–22 min'],['Bayswater North','18–22 min'],['Warranwood','15–30 min'],['Ringwood North','15–30 min'],['Ringwood','15–30 min'],['Croydon South','15–30 min'],['Bayswater','15–30 min'],['The Basin','15–30 min'],['Boronia','15–30 min'],['Wantirna','15–30 min'],['Sassafras','15–30 min'],['Kalorama','15–30 min'],['Silvan','15–30 min'],['Wandin North','15–30 min'],['Park Orchards','15–30 min'],['Mitcham','25–45 min'],['Nunawading','25–45 min'],['Blackburn North','25–45 min'],['Vermont','25–45 min'],['Blackburn','25–45 min'],['Vermont South','25–45 min'],['Forest Hill','25–45 min'],['Blackburn South','25–45 min'],['Belgrave','25–45 min'],['Tecoma','25–45 min'],['Upwey','25–45 min'],['Selby','25–45 min'],['Monbulk','25–45 min'],['Mount Dandenong','25–45 min'],['Ferny Creek','25–45 min'],['Wantirna South','30–50 min'],['Knoxfield','30–50 min'],['Ferntree Gully','30–50 min'],['Upper Ferntree Gully','30–50 min'],['Scoresby','30–50 min'],['Lysterfield','30–50 min'],['Rowville','30–50 min'],['Glen Waverley','30–50 min'],['Wheelers Hill','30–50 min'],['Mount Waverley','30–50 min'],['Burwood East','30–50 min'],['Box Hill North','30–50 min'],['Box Hill','30–50 min'],['Box Hill South','30–50 min'],['Doncaster East','30–50 min'],['Doncaster','30–50 min'],['Templestowe','30–50 min'],['Templestowe Lower','30–50 min'],['Bulleen','30–50 min'],['Surrey Hills','30–50 min'],['Mont Albert North','30–50 min'],['Mont Albert','30–50 min'],['Balwyn North','30–50 min'],['Balwyn','30–50 min'],['Camberwell','30–50 min'],['Ashburton','30–50 min'],['Burwood','30–50 min'],['Chadstone','30–50 min'],['Malvern East','30–50 min'],['Oakleigh East','30–50 min'],['Oakleigh','45–65 min'],['Huntingdale','45–65 min'],['Notting Hill','45–65 min'],['Clayton','45–65 min'],['Clayton South','45–65 min'],['Mulgrave','45–65 min'],['Noble Park North','45–65 min'],['Springvale','45–65 min'],['Springvale South','45–65 min'],['Noble Park','45–65 min'],['Dandenong North','45–65 min'],['Dandenong','45–65 min'],['Keysborough','45–65 min'],['Dandenong South','45–65 min'],['Bangholme','45–65 min'],['Hallam','45–65 min'],['Endeavour Hills','45–65 min'],['Narre Warren North','45–65 min'],['Narre Warren','45–65 min'],['Narre Warren South','45–65 min'],['Berwick','45–65 min'],['Beaconsfield','45–65 min'],['Officer','45–65 min'],['Beaconsfield Upper','45–65 min'],['Pakenham','45–65 min'],['Cranbourne North','45–65 min'],['Cranbourne West','45–65 min'],['Cranbourne','45–65 min'],['Cranbourne East','45–65 min'],['Clyde North','45–65 min'],['Clyde','60–90 min'],['Junction Village','60–90 min'],['Lynbrook','60–90 min'],['Lyndhurst','60–90 min'],['Hampton Park','60–90 min'],['Skye','60–90 min'],['Carrum Downs','60–90 min'],['Seaford','60–90 min'],['Frankston','60–90 min'],['Frankston South','60–90 min'],['Langwarrin','60–90 min'],['Patterson Lakes','60–90 min'],['Carrum','60–90 min'],['Bonbeach','60–90 min'],['Chelsea','60–90 min'],['Edithvale','60–90 min'],['Aspendale','60–90 min'],['Mordialloc','60–90 min'],['Parkdale','60–90 min'],['Mentone','60–90 min'],['Cheltenham','60–90 min'],['Heatherton','60–90 min'],['Dingley Village','60–90 min'],['Moorabbin Airport','60–90 min'],['Moorabbin','60–90 min'],['Highett','60–90 min'],['Hampton East','60–90 min'],['Hampton','60–90 min'],['Sandringham','60–90 min'],['Black Rock','60–90 min'],['Brighton','60–90 min'],['Brighton East','60–90 min'],['Bentleigh','60–90 min'],['Bentleigh East','60–90 min'],['McKinnon','60–90 min'],['Ormond','60–90 min'],['Carnegie','60–90 min'],['Murrumbeena','60–90 min'],['Hughesdale','60–90 min'],['Caulfield','60–90 min'],['Caulfield North','60–90 min'],['Caulfield South','60–90 min'],['Elsternwick','60–90 min'],['Gardenvale','60–90 min'],['Ripponlea','60–90 min']];
+    var input = document.getElementById('suburb-search-input');
+    var results = document.getElementById('suburb-results');
+    if (!input || !results) return;
+    input.addEventListener('input', function() {
+      var q = input.value.trim().toLowerCase();
+      results.innerHTML = '';
+      if (!q) return;
+      var matches = SUBURBS.filter(function(s) { return s[0].toLowerCase().indexOf(q) !== -1; }).slice(0, 8);
+      if (!matches.length) {
+        var none = document.createElement('div');
+        none.className = 'suburb-result sr-none';
+        none.textContent = "Can't find it — get in touch and we'll confirm we can get to you.";
+        results.appendChild(none);
+        return;
+      }
+      matches.forEach(function(s) {
+        var row = document.createElement('div');
+        row.className = 'suburb-result';
+        var name = document.createElement('span');
+        name.className = 'sr-name';
+        name.textContent = s[0];
+        var time = document.createElement('span');
+        time.className = 'sr-time';
+        time.innerHTML = s[1] + '<small>approx. drive</small>';
+        row.appendChild(name);
+        row.appendChild(time);
+        results.appendChild(row);
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
