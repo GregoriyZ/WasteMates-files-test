@@ -58,13 +58,47 @@ ErrorDocument 404 /404.html
   RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
 </IfModule>
 
+# --- Clean URL migration (flat .html pages -> directory-based clean URLs) ---
+# Preserves link equity from the previous flat-HTML site structure
+Redirect 301 /index.html /
+Redirect 301 /about.html /about/
+Redirect 301 /contact.html /contact/
+Redirect 301 /faq.html /faq/
+Redirect 301 /pricing.html /pricing/
+Redirect 301 /services.html /services/
+Redirect 301 /service-areas.html /areas/
+Redirect 301 /green-waste-removal.html /services/green-waste-removal/
+Redirect 301 /construction-waste-removal.html /services/construction-waste-removal/
+Redirect 301 /renovation-waste-removal.html /services/renovation-waste-removal/
+Redirect 301 /body-corporate-real-estate.html /services/body-corporate-real-estate/
+Redirect 301 /garage-shed-cleanouts.html /services/garage-shed-cleanouts/
+Redirect 301 /commercial-office-cleanouts.html /services/commercial-office-cleanouts/
+Redirect 301 /rubbish-removal-mooroolbark.html /areas/mooroolbark/
+Redirect 301 /rubbish-removal-chirnside-park.html /areas/chirnside-park/
+Redirect 301 /rubbish-removal-lilydale.html /areas/lilydale/
+Redirect 301 /rubbish-removal-kilsyth.html /areas/kilsyth/
+Redirect 301 /rubbish-removal-kilsyth-south.html /areas/kilsyth-south/
+Redirect 301 /rubbish-removal-montrose.html /areas/montrose/
+Redirect 301 /rubbish-removal-mount-evelyn.html /areas/mount-evelyn/
+Redirect 301 /rubbish-removal-croydon.html /areas/croydon/
+Redirect 301 /rubbish-removal-croydon-north.html /areas/croydon-north/
+Redirect 301 /rubbish-removal-croydon-hills.html /areas/croydon-hills/
+Redirect 301 /rubbish-removal-wonga-park.html /areas/wonga-park/
+Redirect 301 /rubbish-removal-coldstream.html /areas/coldstream/
+Redirect 301 /rubbish-removal-ringwood-east.html /areas/ringwood-east/
+Redirect 301 /rubbish-removal-heathmont.html /areas/heathmont/
+Redirect 301 /rubbish-removal-bayswater-north.html /areas/bayswater-north/
+
 # --- Legacy WordPress URL redirects (old site, pre-rebuild) ---
-# Preserves any backlink/SEO equity pointing at the old site's URLs
-Redirect 301 /about-us/ /about.html
-Redirect 301 /contact-us/ /contact.html
-Redirect 301 /contact/ /contact.html
-Redirect 301 /faqs/ /faq.html
-Redirect 301 /get-quote/ /contact.html
+# Preserves any backlink/SEO equity pointing at the old site's URLs.
+# NOTE: no "/contact/ -> ..." rule here — /contact/ is now itself the real
+# canonical page, not a legacy path. A rule redirecting it elsewhere would
+# fight the clean-URL rules above and recreate the exact infinite-loop bug
+# this site hit on 2026-08-05.
+Redirect 301 /about-us/ /about/
+Redirect 301 /contact-us/ /contact/
+Redirect 301 /faqs/ /faq/
+Redirect 301 /get-quote/ /contact/
 Redirect 301 /home/ /
 
 # NOTE: specific /services/<slug>/ rules MUST come before the generic
@@ -72,21 +106,20 @@ Redirect 301 /home/ /
 # prefix match, so a generic rule listed first would match every specific
 # path too (via its unmatched remainder) and mangle the target URL
 # (e.g. "/services/household-rubbish-removal/" -> "/services.htmlhousehold-rubbish-removal/").
-Redirect 301 /services/household-rubbish-removal/ /services.html
-Redirect 301 /services/green-waste/ /green-waste-removal.html
-Redirect 301 /services/food-waste/ /green-waste-removal.html
-Redirect 301 /services/construction-waste-removalists/ /construction-waste-removal.html
-Redirect 301 /services/body-corporate-real-estate/ /body-corporate-real-estate.html
-Redirect 301 /services/renovations/ /renovation-waste-removal.html
-Redirect 301 /services/ /services.html
-Redirect 301 /household-rubbish-removal/ /services.html
-Redirect 301 /green-waste-removal/ /green-waste-removal.html
-Redirect 301 /food-waste-removal/ /green-waste-removal.html
-Redirect 301 /construction-waste-removal/ /construction-waste-removal.html
-Redirect 301 /body-corporate-real-estate/ /body-corporate-real-estate.html
-Redirect 301 /renovations/ /renovation-waste-removal.html
-Redirect 301 /renovations-and-rubbish-removal/ /renovation-waste-removal.html
-Redirect 301 /garage-cleanups/ /garage-shed-cleanouts.html
+Redirect 301 /services/household-rubbish-removal/ /services/rubbish-removal/
+Redirect 301 /services/green-waste/ /services/green-waste-removal/
+Redirect 301 /services/food-waste/ /services/green-waste-removal/
+Redirect 301 /services/construction-waste-removalists/ /services/construction-waste-removal/
+Redirect 301 /services/body-corporate-real-estate/ /services/body-corporate-real-estate/
+Redirect 301 /services/renovations/ /services/renovation-waste-removal/
+Redirect 301 /household-rubbish-removal/ /services/rubbish-removal/
+Redirect 301 /green-waste-removal/ /services/green-waste-removal/
+Redirect 301 /food-waste-removal/ /services/green-waste-removal/
+Redirect 301 /construction-waste-removal/ /services/construction-waste-removal/
+Redirect 301 /body-corporate-real-estate/ /services/body-corporate-real-estate/
+Redirect 301 /renovations/ /services/renovation-waste-removal/
+Redirect 301 /renovations-and-rubbish-removal/ /services/renovation-waste-removal/
+Redirect 301 /garage-cleanups/ /services/garage-shed-cleanouts/
 
 # Old blog — no equivalent section on the new site, send to home
 Redirect 301 /blog/ /
