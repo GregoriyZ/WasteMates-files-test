@@ -41,11 +41,19 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# --- Force HTTPS and redirect www to non-www (canonical host: wastemates.com.au) ---
+# --- Redirect www to non-www (canonical host: wastemates.com.au) ---
+# The force-HTTPS half of this block (RewriteCond %{HTTPS} off -> redirect
+# to https://.../$1) is REMOVED on purpose. This origin sits behind a proxy
+# that terminates TLS before the request reaches Apache, so %{HTTPS} always
+# evaluates to "off" here even for a genuinely HTTPS visitor. That rule was
+# unconditionally redirecting every single request to itself — the true
+# root cause of the 2026-08-05 outage (confirmed: with it removed, /, /404,
+# and every real page return correctly; with it present, literally every
+# path loops, including nonexistent ones). Visitors already reach this site
+# over HTTPS via the front-end proxy regardless, so this enforcement was
+# redundant on top of being broken.
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
   RewriteCond %{HTTP_HOST} ^www\.wastemates\.com\.au [NC]
   RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
 </IfModule>
