@@ -50,30 +50,69 @@ ErrorDocument 404 /404.html
   RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
 </IfModule>
 
+# --- Clean URL migration (flat .html pages -> directory-based clean URLs) ---
+# Preserves link equity from the previous flat-HTML site structure
+Redirect 301 /index.html /
+Redirect 301 /about.html /about/
+Redirect 301 /contact.html /contact/
+Redirect 301 /faq.html /faq/
+Redirect 301 /pricing.html /pricing/
+Redirect 301 /services.html /services/
+
 # --- Legacy WordPress URL redirects (old site, pre-rebuild) ---
 # Preserves any backlink/SEO equity pointing at the old site's URLs
-Redirect 301 /about-us/ /about.html
-Redirect 301 /contact-us/ /contact.html
-Redirect 301 /contact/ /contact.html
-Redirect 301 /faqs/ /faq.html
-Redirect 301 /get-quote/ /contact.html
+Redirect 301 /about-us/ /about/
+Redirect 301 /contact-us/ /contact/
+Redirect 301 /faqs/ /faq/
+Redirect 301 /get-quote/ /contact/
 Redirect 301 /home/ /
 
-Redirect 301 /services/ /services.html
-Redirect 301 /services/household-rubbish-removal/ /services.html
-Redirect 301 /services/green-waste/ /services.html
-Redirect 301 /services/food-waste/ /services.html
-Redirect 301 /services/construction-waste-removalists/ /services.html
-Redirect 301 /services/body-corporate-real-estate/ /services.html
-Redirect 301 /services/renovations/ /services.html
-Redirect 301 /household-rubbish-removal/ /services.html
-Redirect 301 /green-waste-removal/ /services.html
-Redirect 301 /food-waste-removal/ /services.html
-Redirect 301 /construction-waste-removal/ /services.html
-Redirect 301 /body-corporate-real-estate/ /services.html
-Redirect 301 /renovations/ /services.html
-Redirect 301 /renovations-and-rubbish-removal/ /services.html
-Redirect 301 /garage-cleanups/ /services.html
+# Flat .html -> directory URLs for the 6 new dedicated service pages added
+# alongside the original 6 (order matters: these specific rules must come
+# before any generic /services/ rule, per the mod_alias prefix-matching bug
+# fixed 2026-08-04 — see the /services/ rules directly below)
+Redirect 301 /green-waste-removal.html /services/green-waste-removal/
+Redirect 301 /construction-waste-removal.html /services/construction-waste-removal/
+Redirect 301 /renovation-waste-removal.html /services/renovation-waste-removal/
+Redirect 301 /body-corporate-real-estate.html /services/body-corporate-real-estate/
+Redirect 301 /garage-shed-cleanouts.html /services/garage-shed-cleanouts/
+Redirect 301 /commercial-office-cleanouts.html /services/commercial-office-cleanouts/
+
+# Legacy WordPress URLs, mapped to their closest dedicated page (specific
+# rules before the generic /services/ rule further down — same ordering
+# rule as above)
+Redirect 301 /services/household-rubbish-removal/ /services/rubbish-removal/
+Redirect 301 /services/green-waste/ /services/green-waste-removal/
+Redirect 301 /services/food-waste/ /services/green-waste-removal/
+Redirect 301 /services/construction-waste-removalists/ /services/construction-waste-removal/
+Redirect 301 /services/body-corporate-real-estate/ /services/body-corporate-real-estate/
+Redirect 301 /services/renovations/ /services/renovation-waste-removal/
+Redirect 301 /household-rubbish-removal/ /services/rubbish-removal/
+Redirect 301 /green-waste-removal/ /services/green-waste-removal/
+Redirect 301 /food-waste-removal/ /services/green-waste-removal/
+Redirect 301 /construction-waste-removal/ /services/construction-waste-removal/
+Redirect 301 /body-corporate-real-estate/ /services/body-corporate-real-estate/
+Redirect 301 /renovations/ /services/renovation-waste-removal/
+Redirect 301 /renovations-and-rubbish-removal/ /services/renovation-waste-removal/
+Redirect 301 /garage-cleanups/ /services/garage-shed-cleanouts/
+
+# Flat suburb-page .html -> directory URLs under /areas/
+Redirect 301 /service-areas.html /areas/
+Redirect 301 /rubbish-removal-mooroolbark.html /areas/mooroolbark/
+Redirect 301 /rubbish-removal-chirnside-park.html /areas/chirnside-park/
+Redirect 301 /rubbish-removal-lilydale.html /areas/lilydale/
+Redirect 301 /rubbish-removal-kilsyth.html /areas/kilsyth/
+Redirect 301 /rubbish-removal-kilsyth-south.html /areas/kilsyth-south/
+Redirect 301 /rubbish-removal-montrose.html /areas/montrose/
+Redirect 301 /rubbish-removal-mount-evelyn.html /areas/mount-evelyn/
+Redirect 301 /rubbish-removal-croydon.html /areas/croydon/
+Redirect 301 /rubbish-removal-croydon-north.html /areas/croydon-north/
+Redirect 301 /rubbish-removal-croydon-hills.html /areas/croydon-hills/
+Redirect 301 /rubbish-removal-wonga-park.html /areas/wonga-park/
+Redirect 301 /rubbish-removal-coldstream.html /areas/coldstream/
+Redirect 301 /rubbish-removal-ringwood-east.html /areas/ringwood-east/
+Redirect 301 /rubbish-removal-heathmont.html /areas/heathmont/
+Redirect 301 /rubbish-removal-bayswater-north.html /areas/bayswater-north/
 
 # Old blog — no equivalent section on the new site, send to home
 Redirect 301 /blog/ /
