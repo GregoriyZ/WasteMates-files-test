@@ -42,8 +42,14 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 # --- Force HTTPS and redirect www to non-www (canonical host: wastemates.com.au) ---
+# Site sits behind Cloudflare in Flexible-SSL mode: Cloudflare terminates TLS
+# with the visitor but connects to this origin over plain HTTP, so %{HTTPS}
+# is always "off" here even for a real HTTPS visitor. Must also check
+# X-Forwarded-Proto (which Cloudflare sets to the visitor's real scheme) or
+# every request 301s to itself forever.
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://wastemates.com.au/$1 [R=301,L]
   RewriteCond %{HTTP_HOST} ^www\.wastemates\.com\.au [NC]
