@@ -7,199 +7,163 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/</loc>
+    <loc>https://wastemates.com.au/services.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/pricing/</loc>
+    <loc>https://wastemates.com.au/pricing.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/about/</loc>
+    <loc>https://wastemates.com.au/about.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/faq/</loc>
+    <loc>https://wastemates.com.au/faq.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/contact/</loc>
+    <loc>https://wastemates.com.au/contact.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/</loc>
+    <loc>https://wastemates.com.au/service-areas.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/rubbish-removal/</loc>
+    <loc>https://wastemates.com.au/green-waste-removal.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/tenant-clean-outs/</loc>
+    <loc>https://wastemates.com.au/construction-waste-removal.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/yard-clean-ups/</loc>
+    <loc>https://wastemates.com.au/renovation-waste-removal.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/light-demolition/</loc>
+    <loc>https://wastemates.com.au/body-corporate-real-estate.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/deceased-estates/</loc>
+    <loc>https://wastemates.com.au/garage-shed-cleanouts.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/hard-bulky-waste/</loc>
+    <loc>https://wastemates.com.au/commercial-office-cleanouts.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/services/green-waste-removal/</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wastemates.com.au/services/construction-waste-removal/</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wastemates.com.au/services/renovation-waste-removal/</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wastemates.com.au/services/body-corporate-real-estate/</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wastemates.com.au/services/garage-shed-cleanouts/</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wastemates.com.au/services/commercial-office-cleanouts/</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://wastemates.com.au/areas/mooroolbark/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-mooroolbark.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/chirnside-park/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-chirnside-park.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/lilydale/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-lilydale.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/kilsyth/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-croydon.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/kilsyth-south/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-croydon-north.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/montrose/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-croydon-hills.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/mount-evelyn/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-ringwood-east.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/croydon/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-heathmont.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/croydon-north/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-kilsyth.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/croydon-hills/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-kilsyth-south.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/wonga-park/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-bayswater-north.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/coldstream/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-montrose.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/ringwood-east/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-mount-evelyn.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/heathmont/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-wonga-park.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wastemates.com.au/areas/bayswater-north/</loc>
+    <loc>https://wastemates.com.au/rubbish-removal-coldstream.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

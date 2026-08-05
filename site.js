@@ -221,7 +221,7 @@ function initMap() {
     // "Get a Quote" / "Get a Free Quote" / "Contact Us" buttons that lead to
     // the contact or pricing form. These are the highest-intent pre-lead clicks.
     document.querySelectorAll(
-      'a[href="/contact/"], a[href="#quote"]'
+      'a[href="contact.html"], a[href="#quote"]'
     ).forEach(function (link) {
       // Don't double-track nav links that are purely informational
       // (phone links are already caught by bindPhoneEvents above)
@@ -247,21 +247,21 @@ function initMap() {
     });
 
     // Pricing page clicks — price researchers are warm leads
-    document.querySelectorAll('a[href="/pricing/"]').forEach(function (link) {
+    document.querySelectorAll('a[href="pricing.html"]').forEach(function (link) {
       link.addEventListener('click', function () {
         trackView('Pricing', 'Pricing');
       });
     });
 
     // About page clicks — brand trust signals
-    document.querySelectorAll('a[href="/about/"]').forEach(function (link) {
+    document.querySelectorAll('a[href="about.html"]').forEach(function (link) {
       link.addEventListener('click', function () {
         trackView('About Us', 'About');
       });
     });
 
     // Services page clicks
-    document.querySelectorAll('a[href="/services/"]').forEach(function (link) {
+    document.querySelectorAll('a[href="services.html"]').forEach(function (link) {
       link.addEventListener('click', function () {
         trackView('Services', 'Services');
       });
@@ -424,7 +424,7 @@ function initMap() {
       '<a class="btn btn--ghost" href="tel:+61494013254">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:17px;height:17px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>' +
         'Call now</a>' +
-      '<a class="btn btn--green" href="/contact/">Get a Free Quote</a>';
+      '<a class="btn btn--green" href="contact.html">Get a Free Quote</a>';
     document.body.appendChild(bar);
   }
 
