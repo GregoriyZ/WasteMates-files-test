@@ -79,6 +79,11 @@ h2.disp{font-size:clamp(34px,4.6vw,60px);}
 h3.disp{font-size:clamp(22px,2.4vw,30px);}
 .green{color:var(--green);}
 .brand-text{color:var(--green);}
+/* Bright accent green fails contrast for body-size link text — links use a
+   darker shade with an underline for readability; decorative span.green
+   headline accents (large display type) are unaffected. */
+a.green{color:var(--green-dd);text-decoration:underline;text-decoration-color:rgba(58,148,21,.35);text-underline-offset:2px;}
+a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
 .lead{font-size:19px;color:var(--ink2);max-width:54ch;}
 .muted{color:var(--muted);}
 
@@ -185,6 +190,42 @@ h3.disp{font-size:clamp(22px,2.4vw,30px);}
 .why-item h3{font-family:var(--disp);text-transform:uppercase;font-size:21px;margin-bottom:6px;}
 .why-item p{color:var(--muted);font-size:15px;}
 
+/* ---------- service areas page ---------- */
+.suburb-search{max-width:560px;margin:0 auto;position:relative;}
+.suburb-search input{
+  width:100%;background:var(--card);border:1px solid var(--line2);color:var(--ink);
+  font-family:var(--body);font-size:17px;padding:16px 48px 16px 20px;outline:none;
+  border-radius:var(--r);transition:border-color .15s;
+}
+.suburb-search input:focus{border-color:var(--green);}
+.suburb-search .search-ic{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--muted);pointer-events:none;}
+.suburb-results{margin-top:14px;text-align:left;}
+.suburb-results:empty{margin-top:0;}
+.suburb-result{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 20px;margin-bottom:10px;
+}
+.suburb-result .sr-name{font-family:var(--cond);font-weight:700;font-size:17px;}
+.suburb-result .sr-time{font-family:var(--cond);font-weight:600;font-size:14px;color:var(--green-dd);text-align:right;white-space:nowrap;}
+.suburb-result .sr-time small{display:block;color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.06em;}
+.suburb-result.sr-none{color:var(--muted);justify-content:flex-start;}
+
+.area-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 24px;text-align:left;height:100%;
+}
+.area-card h3{font-family:var(--disp);text-transform:uppercase;font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:9px;}
+.area-card h3 svg{width:18px;height:18px;color:var(--green-dd);flex:none;}
+.area-card a.green{display:block;padding:4px 0;font-size:15px;}
+.area-card p.muted{font-size:14px;line-height:1.6;margin:0;}
+.areas-grid-core{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;}
+.areas-grid-ext{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;align-items:stretch;}
+.areas-grid-ext .area-card:last-child{grid-column:1/-1;}
+.areas-grid-ext .area-card:last-child p.muted{max-width:900px;}
+@media(max-width:980px){.areas-grid-core{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:680px){.areas-grid-core,.areas-grid-ext{grid-template-columns:1fr;}}
+
 /* ---------- pricing tiers ---------- */
 .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
 .pricing-teaser-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
@@ -271,6 +312,13 @@ h3.disp{font-size:clamp(22px,2.4vw,30px);}
 
 /* ---------- generic content ---------- */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+/* Service-page intro sections: the left heading (service name) is often
+   longer than the right ("What's included") and wraps to 2 lines, which
+   pushed the body copy/checklist out of alignment with each other. Reserve
+   2 lines of height on both headings so the content below always starts
+   at the same row regardless of wrap. */
+.svc-intro h2.disp{min-height:1.84em;}
+@media(max-width:980px){.svc-intro h2.disp{min-height:0;}}
 .prose p{color:var(--ink2);margin-bottom:16px;}
 .tick-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px;}
 .tick-list li{display:flex;gap:12px;align-items:flex-start;color:var(--ink2);}
@@ -325,7 +373,12 @@ h3.disp{font-size:clamp(22px,2.4vw,30px);}
   .hero-grid,.about-grid,.two-col,.contact-grid,.pricing-teaser-grid{grid-template-columns:1fr;}
   .svc-grid,.tst-grid,.steps{grid-template-columns:repeat(2,1fr);}
   .why-grid,.price-grid,.why-grid.cols-3{grid-template-columns:repeat(2,1fr);}
-  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+/* Footer stays a single row of 4 columns down to phone width (680px) —
+   only wraps to one column there, never to an awkward 2x2 tablet state. */
+@media(max-width:980px) and (min-width:681px){
+  .foot-grid{grid-template-columns:1.3fr 1fr 1fr 1fr;gap:24px;}
+  .foot-brand p{max-width:none;}
 }
 /* collapse the nav to a burger before the full bar can get tight */
 @media(max-width:980px){
