@@ -293,7 +293,7 @@ a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
 
 /* ---------- footer ---------- */
 .site-foot{background:var(--bg2);border-top:1px solid var(--line);padding:58px 0 30px;}
-.foot-grid{display:grid;grid-template-columns:minmax(260px,340px) repeat(3,minmax(140px,max-content));column-gap:48px;row-gap:32px;justify-content:space-between;}
+.foot-grid{display:grid;grid-template-columns:minmax(240px,320px) repeat(4,1fr);column-gap:32px;row-gap:32px;}
 .foot-brand img{height:64px;margin-bottom:18px;}
 .foot-brand p{color:var(--muted);font-size:15px;max-width:34ch;}
 .foot-col h3{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:14px;color:var(--brand);margin-bottom:16px;}
@@ -376,10 +376,10 @@ a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
   .svc-grid,.tst-grid,.steps{grid-template-columns:repeat(2,1fr);}
   .why-grid,.price-grid,.why-grid.cols-3{grid-template-columns:repeat(2,1fr);}
 }
-/* Footer stays a single row of 4 columns down to phone width (680px) —
+/* Footer stays a single row of 5 columns down to phone width (680px) —
    only wraps to one column there, never to an awkward 2x2 tablet state. */
 @media(max-width:980px) and (min-width:681px){
-  .foot-grid{grid-template-columns:minmax(200px,260px) repeat(3,minmax(110px,max-content));column-gap:20px;}
+  .foot-grid{grid-template-columns:minmax(180px,220px) repeat(4,1fr);column-gap:20px;}
   .foot-brand p{max-width:none;}
 }
 /* collapse the nav to a burger before the full bar can get tight */
