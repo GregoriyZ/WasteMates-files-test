@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "submit-enquiry",
+      "type": "skill-md",
+      "description": "Submit a rubbish removal or waste collection quote enquiry to WasteMates on a visitor's behalf. Use when a user wants a quote for household rubbish removal, green waste, construction waste, deceased estates, or garage/shed cleanouts in WasteMates' Melbourne (VIC) service area.",
+      "url": "/.well-known/agent-skills/submit-enquiry/SKILL.md",
+      "digest": "sha256:0b790800a45df128b7c25cc912152ea17e49f96299d78cee35de1a21c31008b5"
+    }
+  ]
+}

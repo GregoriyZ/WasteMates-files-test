@@ -1,0 +1,19 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://wastemates.com.au/send-enquiry.php",
+      "service-desc": [
+        {
+          "href": "https://wastemates.com.au/openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.1"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://wastemates.com.au/api-docs.html",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

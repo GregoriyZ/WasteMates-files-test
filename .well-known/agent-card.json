@@ -1,0 +1,38 @@
+{
+  "name": "WasteMates Enquiry Agent",
+  "description": "Submits a rubbish-removal or waste-collection quote enquiry to WasteMates, a Melbourne-based rubbish removal business, on a visitor's behalf. Backed by the same delivery pipeline (email, Telegram, Discord) as the on-site enquiry form.",
+  "supportedInterfaces": [
+    {
+      "url": "https://wastemates.com.au/a2a.php",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "provider": {
+    "organization": "WasteMates",
+    "url": "https://wastemates.com.au"
+  },
+  "version": "1.0.0",
+  "documentationUrl": "https://wastemates.com.au/api-docs.html",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extendedAgentCard": false
+  },
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [
+    {
+      "id": "submit-enquiry",
+      "name": "Submit Rubbish Removal Enquiry",
+      "description": "Submits a quote/enquiry for rubbish removal, waste collection, or a related service (e.g. green waste, construction waste, deceased estates, garage/shed cleanouts). Requires at least one contact method — name, mobile, or email. Every call resolves synchronously to a terminal or input-required Task in the same response; there is no polling, streaming, or push-notification support. Photo attachments are not supported over this interface — direct the enquirer to https://wastemates.com.au/contact.html to attach photos.",
+      "tags": ["rubbish-removal", "waste-management", "quote", "lead-generation", "melbourne"],
+      "examples": [
+        "{\"name\": \"Jordan Smith\", \"mobile\": \"0412345678\", \"suburb\": \"Croydon\", \"job\": \"Household rubbish removal\", \"details\": \"Old couch and mattress in the garage\"}",
+        "Get a quote for a garage cleanout in Ringwood East for someone named Alex, email alex@example.com"
+      ],
+      "inputModes": ["application/json", "text/plain"],
+      "outputModes": ["application/json"]
+    }
+  ]
+}

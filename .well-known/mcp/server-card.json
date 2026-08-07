@@ -1,0 +1,19 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "com.wastemates/enquiry",
+  "version": "1.0.0",
+  "description": "Submit a rubbish removal or waste collection quote enquiry to WasteMates.",
+  "title": "WasteMates Enquiry Server",
+  "websiteUrl": "https://wastemates.com.au",
+  "repository": {
+    "url": "https://github.com/GregoriyZ/WasteMates-files-test",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://wastemates.com.au/mcp.php",
+      "supportedProtocolVersions": ["2026-07-28"]
+    }
+  ]
+}

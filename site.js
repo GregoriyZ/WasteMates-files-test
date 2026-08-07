@@ -454,6 +454,145 @@ function initMap() {
     });
   }
 
+  // ─── WebMCP tool registration ──────────────────────────────────────────────
+  // Exposes real site actions to in-browser AI agents via the WebMCP API
+  // (https://webmachinelearning.github.io/webmcp/). A no-op on browsers
+  // without document.modelContext — everything below is additive to the
+  // normal page, never a replacement for it.
+
+  var SERVICE_AREA_PAGES = {
+    'bayswater-north': 'rubbish-removal-bayswater-north.html',
+    'chirnside-park': 'rubbish-removal-chirnside-park.html',
+    'coldstream': 'rubbish-removal-coldstream.html',
+    'croydon-hills': 'rubbish-removal-croydon-hills.html',
+    'croydon-north': 'rubbish-removal-croydon-north.html',
+    'croydon': 'rubbish-removal-croydon.html',
+    'heathmont': 'rubbish-removal-heathmont.html',
+    'kilsyth-south': 'rubbish-removal-kilsyth-south.html',
+    'kilsyth': 'rubbish-removal-kilsyth.html',
+    'lilydale': 'rubbish-removal-lilydale.html',
+    'montrose': 'rubbish-removal-montrose.html',
+    'mooroolbark': 'rubbish-removal-mooroolbark.html',
+    'mount-evelyn': 'rubbish-removal-mount-evelyn.html',
+    'ringwood-east': 'rubbish-removal-ringwood-east.html',
+    'wonga-park': 'rubbish-removal-wonga-park.html'
+  };
+
+  function slugifySuburb(input) {
+    return String(input || '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function registerCheckServiceAreaTool() {
+    document.modelContext.registerTool({
+      name: 'check_service_area',
+      description: 'Check whether WasteMates services a given Melbourne suburb (Yarra Ranges / outer eastern Melbourne), and get the link to that suburb\'s page if so.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          suburb: { type: 'string', description: 'Suburb name, e.g. "Croydon" or "Mount Evelyn".' }
+        },
+        required: ['suburb']
+      },
+      annotations: { readOnlyHint: true, untrustedContentHint: false },
+      execute: async function (input) {
+        var suburb = input && input.suburb;
+        var page = SERVICE_AREA_PAGES[slugifySuburb(suburb)];
+        return {
+          suburb: suburb,
+          serviced: !!page,
+          url: location.origin + '/' + (page || 'service-areas.html')
+        };
+      }
+    }); // read-only lookup — kept registered for the life of the page.
+  }
+
+  // Fills and submits whichever quote/enquiry form is on the current page,
+  // through the exact same submit path (bindFormSubmission's fetch handler)
+  // a human clicking the button would use, so there's no separate validation
+  // path for agent-submitted enquiries to drift from.
+  function registerSubmitEnquiryTool() {
+    var form = document.getElementById('hero-quote-form') ||
+      document.getElementById('contact-form') ||
+      document.getElementById('pricing-form');
+    if (!form) return; // this page has no enquiry form — nothing to expose.
+
+    var controller = new AbortController();
+    var FIELD_NAMES = ['name', 'mobile', 'email', 'suburb', 'contact_preference', 'job', 'details'];
+
+    document.modelContext.registerTool({
+      name: 'submit_enquiry',
+      description: 'Submit a rubbish removal / waste collection quote enquiry through the form on this page, on the visitor\'s behalf. Requires at least one of "name", "mobile", or "email".',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', description: "Enquirer's full name." },
+          mobile: { type: 'string', description: 'Contact phone number.' },
+          email: { type: 'string', description: 'Contact email address.' },
+          suburb: { type: 'string', description: 'Job location suburb.' },
+          contact_preference: { type: 'string', description: 'e.g. "Phone" or "Email".' },
+          job: { type: 'string', description: 'e.g. "Household rubbish removal".' },
+          details: { type: 'string', description: 'Free-text description of the job.' }
+        }
+      },
+      annotations: { readOnlyHint: false, untrustedContentHint: false },
+      execute: async function (input) {
+        input = input || {};
+        if (!input.name && !input.mobile && !input.email) {
+          return { status: 'input_required', message: 'At least one of "name", "mobile", or "email" is required to submit this enquiry.' };
+        }
+
+        FIELD_NAMES.forEach(function (key) {
+          if (input[key] === undefined) return;
+          var el = form.querySelector('[name="' + key + '"]');
+          if (el) el.value = input[key];
+        });
+
+        var statusEl = form.querySelector('.form-status');
+
+        return new Promise(function (resolve) {
+          var settled = false;
+          var observer = statusEl ? new MutationObserver(function () {
+            if (statusEl.classList.contains('form-status--success')) {
+              finish({ status: 'sent', message: "Thanks — the WasteMates team will be in touch soon." });
+              // Job's done — don't invite the agent to submit this form
+              // again on this page load.
+              controller.abort();
+            } else if (statusEl.classList.contains('form-status--error')) {
+              finish({ status: 'error', message: 'Something went wrong sending that — please call 0494 013 254 instead.' });
+            }
+          }) : null;
+
+          function finish(result) {
+            if (settled) return;
+            settled = true;
+            if (observer) observer.disconnect();
+            clearTimeout(timeoutId);
+            resolve(result);
+          }
+
+          var timeoutId = setTimeout(function () {
+            finish({ status: 'unknown', message: 'The enquiry was submitted but no confirmation arrived in time. If unsure, call 0494 013 254.' });
+          }, 20000);
+
+          if (observer) observer.observe(statusEl, { attributes: true, attributeFilter: ['class'] });
+          if (form.requestSubmit) form.requestSubmit();
+          else form.dispatchEvent(new Event('submit', { cancelable: true }));
+          if (!observer) finish({ status: 'submitted', message: 'Enquiry submitted.' });
+        });
+      }
+    }, { signal: controller.signal });
+  }
+
+  function registerWebMcpTools() {
+    if (!document.modelContext || typeof document.modelContext.registerTool !== 'function') return;
+    registerCheckServiceAreaTool();
+    registerSubmitEnquiryTool();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     captureClickId();     // store fbclid from URL before any events fire
     bindMenu();
@@ -467,5 +606,6 @@ function initMap() {
     bindPhoneEvents();    // catches sticky bar phone links too
     bindCtaEvents();      // catches sticky bar CTA links too
     initMap();
+    registerWebMcpTools();
   });
 })();

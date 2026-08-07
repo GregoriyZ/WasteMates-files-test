@@ -34,6 +34,34 @@ ErrorDocument 404 /404.html
   RedirectMatch 403 ^/lib/
 </IfModule>
 
+# --- API catalog (RFC 9727) ---
+# Extensionless file, so mod_mime can't guess its type — force it explicitly.
+<Files "api-catalog">
+  ForceType application/linkset+json
+</Files>
+
+# --- auth.md agent registration discovery ---
+<Files "auth.md">
+  ForceType "text/markdown; charset=utf-8"
+</Files>
+
+# --- Agent Skills Discovery (agent-skills-discovery-rfc v0.2.0) ---
+<Files "SKILL.md">
+  ForceType "text/markdown; charset=utf-8"
+</Files>
+
+# --- Link headers for agent discovery (RFC 8288 / RFC 9727 §3) ---
+# Homepage only — `<Files>` matches the resolved filename, so this covers
+# both `/` and `/index.html` (DirectoryIndex serves index.html for `/`).
+<IfModule mod_headers.c>
+  <Files "index.html">
+    Header add Link '</.well-known/api-catalog>; rel="api-catalog"'
+    Header add Link '</openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json;version=3.1"'
+    Header add Link '</api-docs.html>; rel="service-doc"; type="text/html"'
+    Header add Link '</.well-known/api-catalog>; rel="describedby"'
+  </Files>
+</IfModule>
+
 # --- Security headers ---
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"

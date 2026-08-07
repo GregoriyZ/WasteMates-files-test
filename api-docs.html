@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Enquiry API — WasteMates</title>
+<meta name="robots" content="noindex, follow" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" /></noscript>
+<link rel="stylesheet" href="styles.css?v=17" />
+<style>
+  .api-doc table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  .api-doc th, .api-doc td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #e2e2e2; font-size: 0.95rem; }
+  .api-doc th { color: #667; font-weight: 600; }
+  .api-doc code { background: #f2f2f2; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+  .api-doc pre { background: #1e1e1e; color: #eee; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
+  .api-doc h2 { margin-top: 40px; }
+</style>
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="index.html" aria-label="WasteMates home"><picture><source srcset="assets/logo.webp" type="image/webp" /><img src="assets/logo.png" alt="WasteMates" width="89" height="58" /></picture></a>
+        <div class="nav-links">
+          <a href="index.html">Home</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="about.html">About</a><a href="service-areas.html">Areas</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-cta">
+          <a class="phone-link" href="tel:+61494013254"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>0494 013 254</a>
+          <a class="btn btn--green" href="contact.html">Get a Quote</a>
+          <button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="about.html">About</a><a href="service-areas.html">Areas</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <h1>Enquiry <span class="green">API</span></h1>
+        <p class="lead" style="margin-top:18px;">This is the form backend behind WasteMates' quote/enquiry forms. It's documented here for API discovery — full machine-readable spec at <a href="openapi.json">/openapi.json</a>.</p>
+      </div>
+    </section>
+
+    <section class="wrap api-doc" style="padding: 20px 0 60px;">
+      <h2>POST /send-enquiry.php</h2>
+      <p>Accepts a <code>multipart/form-data</code> submission and dispatches it to the WasteMates team by email, Telegram, and Discord. There is no JSON response — the endpoint always returns <code>303 See Other</code> and redirects back to the site, whether the submission succeeded, failed validation, or was empty.</p>
+
+      <h2>Fields</h2>
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>name</code></td><td>string</td><td>Enquirer's full name</td></tr>
+          <tr><td><code>mobile</code></td><td>string</td><td>Contact phone number</td></tr>
+          <tr><td><code>email</code></td><td>string</td><td>Contact email</td></tr>
+          <tr><td><code>suburb</code></td><td>string</td><td>Job location suburb</td></tr>
+          <tr><td><code>contact_preference</code></td><td>string</td><td>e.g. "Phone" or "Email"</td></tr>
+          <tr><td><code>job</code></td><td>string</td><td>e.g. "Household rubbish removal"</td></tr>
+          <tr><td><code>details</code></td><td>string</td><td>Free-text job description</td></tr>
+          <tr><td><code>photos[]</code></td><td>file (repeatable)</td><td>Up to 8 photos, 6MB each, 15MB combined. jpeg/png/webp/gif/heic/heif only</td></tr>
+          <tr><td><code>_redirect</code></td><td>string</td><td>One of <code>index.html</code>, <code>contact.html</code>, <code>pricing.html</code>. Defaults to <code>contact.html</code></td></tr>
+          <tr><td><code>_source</code></td><td>string</td><td>Label for which on-site form this came from</td></tr>
+        </tbody>
+      </table>
+      <p>At least one of <code>name</code>, <code>mobile</code>, or <code>email</code> is required — a submission with none of the three is silently dropped.</p>
+
+      <h2>Example</h2>
+      <pre>curl -i https://wastemates.com.au/send-enquiry.php \
+  -F "name=Jordan Smith" \
+  -F "mobile=0412345678" \
+  -F "email=jordan@example.com" \
+  -F "suburb=Croydon" \
+  -F "job=Household rubbish removal" \
+  -F "details=Old couch and mattress in the garage" \
+  -F "_source=API docs example"</pre>
+
+      <h2>Response</h2>
+      <table>
+        <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>303 See Other</code></td><td>Always returned. <code>Location</code> header points back to the originating page with <code>?sent=1</code> appended.</td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top:32px;">This endpoint exists to serve WasteMates' own site forms — it isn't a general-purpose public API, but the contract above is stable and safe to call directly (e.g. from another WasteMates-owned surface or an automated agent submitting a lead on a visitor's behalf).</p>
+    </section>
+  </main>
+
+  <script src="site.js?v=11"></script>
+</body>
+</html>

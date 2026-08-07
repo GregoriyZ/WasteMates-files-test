@@ -1,0 +1,91 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "WasteMates Enquiry API",
+    "description": "Accepts quote/enquiry submissions from the WasteMates website's hero, contact, and pricing forms and dispatches them to the team via email, Telegram, and Discord. This is the form-backend for wastemates.com.au, documented here for API discovery (RFC 9727) rather than as a general-purpose third-party integration.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "WasteMates",
+      "url": "https://wastemates.com.au/contact.html"
+    }
+  },
+  "servers": [
+    { "url": "https://wastemates.com.au" }
+  ],
+  "paths": {
+    "/send-enquiry.php": {
+      "post": {
+        "summary": "Submit a rubbish removal enquiry",
+        "operationId": "submitEnquiry",
+        "description": "Accepts a form submission with the enquirer's details and optional job photos. The endpoint always responds with a 303 redirect back to the site (even on validation failure or an empty submission) — it has no JSON error responses, matching its use as a plain HTML form target.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Enquirer's full name."
+                  },
+                  "mobile": {
+                    "type": "string",
+                    "description": "Contact phone number."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "suburb": {
+                    "type": "string",
+                    "description": "Job location suburb."
+                  },
+                  "contact_preference": {
+                    "type": "string",
+                    "description": "How the enquirer prefers to be contacted, e.g. \"Phone\" or \"Email\"."
+                  },
+                  "job": {
+                    "type": "string",
+                    "description": "Type of job, e.g. \"Household rubbish removal\"."
+                  },
+                  "details": {
+                    "type": "string",
+                    "description": "Free-text description of the job."
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": { "type": "string", "format": "binary" },
+                    "description": "Up to 8 photos of the job. 6MB per photo, 15MB combined. Accepted types: image/jpeg, image/png, image/webp, image/gif, image/heic, image/heif.",
+                    "maxItems": 8
+                  },
+                  "_redirect": {
+                    "type": "string",
+                    "enum": ["index.html", "contact.html", "pricing.html"],
+                    "description": "Which page to redirect back to after submission. Defaults to contact.html if omitted or unrecognized."
+                  },
+                  "_source": {
+                    "type": "string",
+                    "description": "Label identifying which on-site form submitted the enquiry, used in the notification subject line."
+                  }
+                },
+                "description": "At least one of name, mobile, or email is required — a submission with none of the three is silently dropped (still returns 303)."
+              }
+            }
+          }
+        },
+        "responses": {
+          "303": {
+            "description": "Submission processed (or intentionally dropped as spam/empty) and redirected back to the site.",
+            "headers": {
+              "Location": {
+                "schema": { "type": "string" },
+                "description": "Relative path of the originating page with ?sent=1 appended, e.g. /contact.html?sent=1."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
