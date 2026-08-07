@@ -250,7 +250,7 @@ a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
 /* ---------- about teaser ---------- */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
 .about-photo{position:relative;}
-.about-photo img{width:100%;aspect-ratio:1/1;display:block;object-fit:cover;object-position:center;}
+.about-photo img{width:100%;aspect-ratio:3/4;display:block;object-fit:cover;object-position:center;}
 .about-photo::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--brand);pointer-events:none;}
 /* embedded Leaflet map — service area */
 #about-map,
