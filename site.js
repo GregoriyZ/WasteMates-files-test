@@ -394,14 +394,28 @@ function initMap() {
             if (response.ok && response.url.indexOf('sent=1') !== -1) {
               setFormStatus(statusEl, 'success', "Thanks — we'll be in touch soon!");
               form.reset();
+              // Hold the button in a "sent" state for a couple seconds so the
+              // tap itself feels confirmed on mobile, instead of snapping
+              // straight back to "Get my free quote" while the banner above
+              // does the talking.
+              if (submitBtn) {
+                submitBtn.textContent = 'Sent ✓';
+                submitBtn.classList.add('btn--sent');
+              }
+              setTimeout(function () {
+                form.dataset.submitting = 'false';
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = submitBtn.dataset.originalText;
+                  submitBtn.classList.remove('btn--sent');
+                }
+              }, 2500);
             } else {
               throw new Error('Unexpected response');
             }
           })
           .catch(function () {
             setFormStatus(statusEl, 'error', 'Something went wrong sending that — please call us on 0494 013 254 instead.');
-          })
-          .finally(function () {
             form.dataset.submitting = 'false';
             if (submitBtn) {
               submitBtn.disabled = false;

@@ -369,6 +369,7 @@ a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
 .form-status--sending .form-spinner{display:inline-block;}
 @keyframes form-spin{to{transform:rotate(360deg);}}
 .btn[disabled]{opacity:.6;cursor:not-allowed;pointer-events:none;}
+.btn--sent[disabled]{opacity:1;background:var(--green);color:#0a1303;}
 
 /* ---------- responsive ---------- */
 @media(max-width:980px){
