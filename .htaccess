@@ -41,6 +41,31 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
+# --- Markdown for agents ---
+# Requests that send `Accept: text/markdown` (AI agents/crawlers wanting
+# clean text instead of scraping the full HTML page) get routed through
+# markdown.php instead of the static HTML file. Browsers (Accept: text/html)
+# are untouched and keep getting the normal page.
+#
+# `Vary: Accept` on the .html responses is required here, not decorative:
+# this site sits behind Cloudflare's cache, and without it Cloudflare could
+# cache one Accept-variant's response for a URL and serve it to a client
+# that sent the other Accept header — breaking the negotiation for anyone
+# hitting a cached page. markdown.php sets its own Vary: Accept to match.
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header merge Vary "Accept"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+  RewriteRule ^$ /markdown.php?page=index [L]
+
+  RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+  RewriteRule ^([a-z0-9-]+)\.html$ /markdown.php?page=$1 [L]
+</IfModule>
+
 # --- Redirect www to non-www (canonical host: wastemates.com.au) ---
 # The force-HTTPS half of this block (RewriteCond %{HTTPS} off -> redirect
 # to https://.../$1) is REMOVED on purpose. This origin sits behind a proxy
