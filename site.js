@@ -210,6 +210,8 @@ function initMap() {
     document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
       link.addEventListener('click', function () {
         trackContact();
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'phone_click' });
       });
     });
   }
@@ -235,6 +237,8 @@ function initMap() {
         else if (link.closest('.section'))    source = 'Section';
         else if (link.closest('footer'))      source = 'Footer';
         trackQuoteIntent(source);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'cta_click', cta_location: source });
       });
     });
 
@@ -283,6 +287,8 @@ function initMap() {
         if (typeof fbq === 'function') {
           fbq('trackCustom', 'SocialClick', { platform: platform });
         }
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'outbound_click', outbound_platform: platform });
       });
     });
   }
@@ -321,6 +327,15 @@ function initMap() {
         var files = input.files;
         var error = files.length ? describePhotoError(files) : null;
         input.setCustomValidity(error || '');
+
+        if (files.length) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'photo_upload_attempt',
+            photo_upload_status: error ? 'rejected' : 'accepted',
+            photo_count: files.length,
+          });
+        }
 
         if (!hint) return;
 
@@ -394,6 +409,8 @@ function initMap() {
             if (response.ok && response.url.indexOf('sent=1') !== -1) {
               setFormStatus(statusEl, 'success', "Thanks — we'll be in touch soon!");
               form.reset();
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({ event: 'form_submit_success', form_location: id });
               // Hold the button in a "sent" state for a couple seconds so the
               // tap itself feels confirmed on mobile, instead of snapping
               // straight back to "Get my free quote" while the banner above
@@ -416,6 +433,8 @@ function initMap() {
           })
           .catch(function () {
             setFormStatus(statusEl, 'error', 'Something went wrong sending that — please call us on 0494 013 254 instead.');
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'form_submit_error', form_location: id });
             form.dataset.submitting = 'false';
             if (submitBtn) {
               submitBtn.disabled = false;
