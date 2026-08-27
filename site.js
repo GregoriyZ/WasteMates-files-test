@@ -25,11 +25,19 @@ function initMap() {
 
     L.circle(serviceCentre, {
       radius: 130000,
+      color: '#1a1a1a',
+      weight: 5,
+      opacity: 0.25,
+      fill: false,
+    }).addTo(map);
+
+    L.circle(serviceCentre, {
+      radius: 130000,
       color: '#61DE2A',
       fillColor: '#61DE2A',
-      fillOpacity: 0.12,
-      weight: 2,
-      opacity: 0.8,
+      fillOpacity: 0.2,
+      weight: 3,
+      opacity: 1,
     }).addTo(map);
   });
 }
