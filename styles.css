@@ -249,8 +249,8 @@ a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
 
 /* ---------- about teaser ---------- */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
-.about-photo{position:relative;}
-.about-photo img{width:100%;aspect-ratio:3/4;display:block;object-fit:cover;object-position:center;}
+.about-photo{position:relative;aspect-ratio:3/4;overflow:hidden;}
+.about-photo img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center;}
 .about-photo::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--brand);pointer-events:none;}
 /* embedded Leaflet map — service area */
 #about-map,
@@ -396,7 +396,6 @@ a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
   .section.tight{padding:46px 0;}
   .svc-grid,.tst-grid,.steps,.why-grid,.price-grid,.foot-grid,.form .row,.why-grid.cols-3{grid-template-columns:1fr;}
   .cta-band .wrap{flex-direction:column;align-items:flex-start;}
-  .about-photo img{height:auto;}
 }
 /* phone refinements — keep big display type & rows from clipping */
 @media(max-width:520px){
