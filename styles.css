@@ -431,3 +431,15 @@ a.green:hover{color:var(--green-d);text-decoration-color:currentColor;}
 .mobile-menu a{font-family:var(--disp);text-transform:uppercase;font-size:30px;color:var(--ink);padding:10px 0;border-bottom:1px solid var(--line);}
 .mobile-menu a:last-of-type{border:0;}
 .mobile-menu .btn{margin-top:18px;}
+
+/* narrow phones (~320-380px wide): the hero's phone-call button was
+   landing directly behind the fixed sticky bar on load, because
+   "GET A FREE QUOTE" wraps to 2 lines at this width, making the bar
+   taller right as the hero content also runs closer to the fold. */
+@media(max-width:380px){
+  .hero-grid{padding-top:36px;}
+  .lead{font-size:16px;}
+  .cta-row{margin:18px 0 20px;}
+  .sticky-cta{padding:8px 10px calc(8px + env(safe-area-inset-bottom));}
+  .sticky-cta .btn{font-size:12px;padding:11px 6px;}
+}
