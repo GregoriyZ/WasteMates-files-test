@@ -57,7 +57,7 @@ function resend_send_email(string $apiKey, string $from, string $to, ?string $re
     return ['success' => $httpCode >= 200 && $httpCode < 300, 'http_code' => $httpCode, 'response' => $response];
 }
 
-function telegram_send_message(string $token, string $chatId, string $text): bool
+function telegram_message_handle(string $token, string $chatId, string $text)
 {
     $ch = curl_init("https://api.telegram.org/bot{$token}/sendMessage");
     curl_setopt_array($ch, [
@@ -66,13 +66,10 @@ function telegram_send_message(string $token, string $chatId, string $text): boo
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT => 8,
     ]);
-    curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-    return $httpCode >= 200 && $httpCode < 300;
+    return $ch;
 }
 
-function telegram_send_photo(string $token, string $chatId, string $path, string $mime, string $caption = ''): bool
+function telegram_photo_handle(string $token, string $chatId, string $path, string $mime, string $caption = '')
 {
     $ch = curl_init("https://api.telegram.org/bot{$token}/sendPhoto");
     curl_setopt_array($ch, [
@@ -85,13 +82,10 @@ function telegram_send_photo(string $token, string $chatId, string $path, string
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT => 15,
     ]);
-    curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-    return $httpCode >= 200 && $httpCode < 300;
+    return $ch;
 }
 
-function discord_send_notification(string $webhookUrl, string $title, array $embedFields, array $attachments): bool
+function discord_notification_handle(string $webhookUrl, string $title, array $embedFields, array $attachments)
 {
     $embed = [
         'title'  => mb_substr($title, 0, 256),
@@ -111,10 +105,35 @@ function discord_send_notification(string $webhookUrl, string $title, array $emb
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT => 20,
     ]);
-    curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-    return $httpCode >= 200 && $httpCode < 300;
+    return $ch;
+}
+
+/**
+ * Runs a keyed set of curl handles concurrently and returns each one's HTTP
+ * status code under the same key. Used so Telegram/Discord notifications
+ * (and per-photo Telegram sends) don't block on each other one at a time.
+ */
+function curl_multi_run(array $handles): array
+{
+    $mh = curl_multi_init();
+    foreach ($handles as $ch) {
+        curl_multi_add_handle($mh, $ch);
+    }
+    do {
+        $status = curl_multi_exec($mh, $running);
+        if ($running) {
+            curl_multi_select($mh);
+        }
+    } while ($running && $status === CURLM_OK);
+
+    $codes = [];
+    foreach ($handles as $key => $ch) {
+        $codes[$key] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_multi_remove_handle($mh, $ch);
+        curl_close($ch);
+    }
+    curl_multi_close($mh);
+    return $codes;
 }
 
 /**
@@ -188,8 +207,13 @@ function wm_send_enquiry_notifications(array $config, array $fields, string $sou
         error_log('WasteMates enquiry email failed (HTTP ' . $emailResult['http_code'] . '): ' . $emailResult['response']);
     }
 
-    // ── Telegram notification ───────────────────────────────────────────────
-    $telegramSent = false;
+    // ── Telegram + Discord notifications ────────────────────────────────────
+    // Built as curl handles and fired together via curl_multi_run() instead
+    // of one blocking curl_exec() per message (including per-photo), which
+    // could otherwise chain into minutes of sequential wait on a lead with
+    // several photos attached.
+    $handles = [];
+
     if (!empty($config['telegram_bot_token']) && !empty($config['telegram_chat_id'])) {
         $token = $config['telegram_bot_token'];
         $chatId = $config['telegram_chat_id'];
@@ -210,15 +234,13 @@ function wm_send_enquiry_notifications(array $config, array $fields, string $sou
             $tgLines[] = '⚠️ The email to ' . $config['mail_to'] . ' failed to send — this Telegram message is the only record of this lead.';
         }
 
-        $telegramSent = telegram_send_message($token, $chatId, implode("\n", $tgLines));
+        $handles['telegram_text'] = telegram_message_handle($token, $chatId, implode("\n", $tgLines));
 
         foreach ($attachments as $i => $a) {
-            telegram_send_photo($token, $chatId, $a['tmp'], $a['mime'], 'Photo ' . ($i + 1) . '/' . count($attachments));
+            $handles["telegram_photo_{$i}"] = telegram_photo_handle($token, $chatId, $a['tmp'], $a['mime'], 'Photo ' . ($i + 1) . '/' . count($attachments));
         }
     }
 
-    // ── Discord notification ────────────────────────────────────────────────
-    $discordSent = false;
     if (!empty($config['discord_webhook_url'])) {
         $discordFields = [];
         foreach ($rows as $label => $value) {
@@ -237,12 +259,27 @@ function wm_send_enquiry_notifications(array $config, array $fields, string $sou
             $discordFields[] = ['name' => '⚠️ Email failed', 'value' => 'The email to ' . $config['mail_to'] . ' failed to send — this Discord message is the only record of this lead.', 'inline' => false];
         }
 
-        $discordSent = discord_send_notification(
+        $handles['discord'] = discord_notification_handle(
             $config['discord_webhook_url'],
             '🗑 New enquiry — ' . $source . ($fields['name'] !== '' ? " from {$fields['name']}" : ''),
             $discordFields,
             $attachments
         );
+    }
+
+    $telegramSent = false;
+    $discordSent = false;
+    if (!empty($handles)) {
+        $codes = curl_multi_run($handles);
+        $ok = function (string $key) use ($codes): bool {
+            return isset($codes[$key]) && $codes[$key] >= 200 && $codes[$key] < 300;
+        };
+        if (isset($codes['telegram_text'])) {
+            $telegramSent = $ok('telegram_text');
+        }
+        if (isset($codes['discord'])) {
+            $discordSent = $ok('discord');
+        }
     }
 
     return [
