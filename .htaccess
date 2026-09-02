@@ -6,6 +6,15 @@ Options -Indexes
 # Custom 404 page
 ErrorDocument 404 /404.html
 
+# --- Parse .html as PHP so shared nav/footer/schema can live in one place
+# (lib/partials/) instead of being duplicated in every page, without
+# changing any URL — every backlink, the sitemap, and canonical tags all
+# assume the .html extension. This is UNTESTED against this specific
+# GoDaddy host's PHP handler config; verify one page renders correctly
+# after deploy (curl it and diff against the pre-deploy version) before
+# trusting the rest of the site on it.
+AddType application/x-httpd-php .html
+
 # --- Compression ---
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript image/svg+xml
