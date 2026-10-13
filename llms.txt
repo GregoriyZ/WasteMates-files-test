@@ -2,17 +2,17 @@
 
 > WasteMates is an affordable rubbish removal business based in Mooroolbark, Victoria, Australia, serving Melbourne's outer east. Prices start from $40 per item, with a fixed, upfront price confirmed on site before any work starts.
 
-## Key facts
+**Key facts**
 
 - Business: WasteMates, rubbish removal
 - Base: Cambridge Road, Mooroolbark VIC 3138, Australia
-- Service area: Mooroolbark, Chirnside Park, Lilydale, Kilsyth, Kilsyth South, Montrose, Mount Evelyn, Croydon, Croydon North, Croydon Hills, Wonga Park, Coldstream, Ringwood East, Heathmont, Bayswater North and the surrounding Yarra Ranges, Maroondah and Knox suburbs
+- Service area: Mooroolbark, Chirnside Park, Lilydale, Kilsyth, Kilsyth South, Montrose, Mount Evelyn, Croydon, Croydon North, Croydon Hills, Wonga Park, Coldstream, Ringwood East, Heathmont, Bayswater North and the surrounding Yarra Ranges, Maroondah and Knox suburbs, plus greater Melbourne for bigger jobs
 - Hours: 7 days a week, 7am to 8pm
 - Phone: 0494 013 254
 - Email: info@wastemates.com.au
 - Website: https://wastemates.com.au/
 
-## Price list (current as of October 2026, Australian dollars)
+**Price list (current as of October 2026, Australian dollars)**
 
 Loose rubbish is priced per cubic metre. Listed items are priced per item, separately from cubic-metre loads. The final price can also depend on weight and access and is confirmed on site before work starts.
 
@@ -42,7 +42,7 @@ Tyres, per tyre:
 - Tyre, no rim: $40
 - Tyre on rim: $50
 
-## What WasteMates does not take
+**What WasteMates does not take**
 
 Asbestos, hazardous chemicals, and medical or biohazard waste.
 
@@ -56,5 +56,38 @@ Asbestos, hazardous chemicals, and medical or biohazard waste.
 - [About](https://wastemates.com.au/about.html): who WasteMates is
 - [Contact](https://wastemates.com.au/contact.html): get a quote
 - [Privacy and cookies](https://wastemates.com.au/privacy.html)
+
+## Services
+
+- [Body Corporate and Real Estate](https://wastemates.com.au/body-corporate-real-estate.html)
+- [Commercial and Office Clean Outs](https://wastemates.com.au/commercial-office-cleanouts.html)
+- [Construction Waste Removal](https://wastemates.com.au/construction-waste-removal.html)
+- [Deceased Estate Clearance](https://wastemates.com.au/deceased-estates.html)
+- [Garage and Shed Clean Outs](https://wastemates.com.au/garage-shed-cleanouts.html)
+- [Green Waste Removal](https://wastemates.com.au/green-waste-removal.html)
+- [Hard & Bulky Waste Removal](https://wastemates.com.au/hard-bulky-waste.html)
+- [Light Demolition](https://wastemates.com.au/light-demolition.html)
+- [Renovation Waste Removal](https://wastemates.com.au/renovation-waste-removal.html)
+- [Rubbish Removal](https://wastemates.com.au/rubbish-removal.html)
+- [Tenant Clean Outs](https://wastemates.com.au/tenant-clean-outs.html)
+- [Yard Clean Ups](https://wastemates.com.au/yard-clean-ups.html)
+
+## Suburbs
+
+- [Rubbish removal Bayswater North](https://wastemates.com.au/rubbish-removal-bayswater-north.html)
+- [Rubbish removal Chirnside Park](https://wastemates.com.au/rubbish-removal-chirnside-park.html)
+- [Rubbish removal Coldstream](https://wastemates.com.au/rubbish-removal-coldstream.html)
+- [Rubbish removal Croydon Hills](https://wastemates.com.au/rubbish-removal-croydon-hills.html)
+- [Rubbish removal Croydon North](https://wastemates.com.au/rubbish-removal-croydon-north.html)
+- [Rubbish removal Croydon](https://wastemates.com.au/rubbish-removal-croydon.html)
+- [Rubbish removal Heathmont](https://wastemates.com.au/rubbish-removal-heathmont.html)
+- [Rubbish removal Kilsyth South](https://wastemates.com.au/rubbish-removal-kilsyth-south.html)
+- [Rubbish removal Kilsyth](https://wastemates.com.au/rubbish-removal-kilsyth.html)
+- [Rubbish removal Lilydale](https://wastemates.com.au/rubbish-removal-lilydale.html)
+- [Rubbish removal Montrose](https://wastemates.com.au/rubbish-removal-montrose.html)
+- [Rubbish removal Mooroolbark](https://wastemates.com.au/rubbish-removal-mooroolbark.html)
+- [Rubbish removal Mount Evelyn](https://wastemates.com.au/rubbish-removal-mount-evelyn.html)
+- [Rubbish removal Ringwood East](https://wastemates.com.au/rubbish-removal-ringwood-east.html)
+- [Rubbish removal Wonga Park](https://wastemates.com.au/rubbish-removal-wonga-park.html)
 
 Every page is also available as Markdown by requesting it with the header `Accept: text/markdown`.
