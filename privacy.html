@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en-AU">
 <head>
-<script>try{window.wmOff=localStorage.getItem("wm_consent")==="denied"}catch(e){}</script>
+<script>try{window.wmOff=localStorage.getItem("wm_consent")!=="granted"}catch(e){window.wmOff=true}</script>
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.uarg=[].slice.call(arguments);t.uarg.unshift(e);t.push(t.uarg)}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   window.wmOff||posthog.init('phc_xnLDcBuaa5d7nFL42VHPmkcdstNhM6YyDCX8HWycRjqx', {
@@ -360,7 +360,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <h2 class="disp" style="font-size:28px;margin:28px 0 12px;">What we collect</h2>
         <p><strong>Details you send us.</strong> When you use an enquiry form we receive what you enter: your name, mobile number, email address, suburb, preferred contact method, the type of job, your description of it and any photos you attach.</p>
-        <p><strong>How the site is used.</strong> Unless you decline cookies, we also collect information about your visit: the pages you view, the buttons and links you click, the site that referred you, your device and browser type, and your approximate location based on your IP address. This is done using cookies and similar identifiers stored in your browser.</p>
+        <p><strong>How the site is used.</strong> If you accept cookies, we also collect information about your visit: the pages you view, the buttons and links you click, the site that referred you, your device and browser type, and your approximate location based on your IP address. This is done using cookies and similar identifiers stored in your browser.</p>
 
         <h2 class="disp" style="font-size:28px;margin:28px 0 12px;">Why we collect it</h2>
         <p>We use your enquiry details to reply to you, prepare a quote and carry out the job. We use visit information to understand how people use the site, improve it, and measure how well our advertising is working. We don't sell your information.</p>
@@ -373,7 +373,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Some of these providers store information outside Australia, including in the United States.</p>
 
         <h2 class="disp" style="font-size:28px;margin:28px 0 12px;">Cookies and your choice</h2>
-        <p>The first time you visit, a banner asks whether you accept or decline cookies. If you decline, the analytics and advertising tools listed above are not loaded on your device. The website and the enquiry forms work the same either way.</p>
+        <p>The first time you visit, a banner asks whether you accept or decline cookies. The analytics and advertising tools listed above are only loaded if you accept. If you decline, or don't answer, they are not loaded on your device. The website and the enquiry forms work the same either way.</p>
         <p><a href="#" data-wm-consent-open class="btn btn--green">Change my cookie choice</a></p>
 
         <h2 class="disp" style="font-size:28px;margin:28px 0 12px;">Accessing or deleting your information</h2>
@@ -409,7 +409,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </footer>
 
-  <script src="consent.js?v=1" defer></script>
+  <script src="consent.js?v=2" defer></script>
   <script src="site.min.js?v=1"></script>
 </body>
 </html>

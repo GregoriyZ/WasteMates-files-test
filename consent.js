@@ -1,6 +1,6 @@
 /* WasteMates cookie notice.
    Choice is kept in localStorage "wm_consent" ("granted" | "denied").
-   The tracking snippets in each page's <head> skip loading when it is "denied". */
+   The tracking snippets in each page's <head> only load when it is "granted". */
 (function () {
   var KEY = 'wm_consent';
   function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -17,7 +17,7 @@
       'padding:14px 18px calc(14px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:12px 18px;' +
       'align-items:center;justify-content:center;font-size:14.5px;line-height:1.45;box-shadow:0 -4px 18px rgba(0,0,0,.25);';
     bar.innerHTML =
-      '<p style="margin:0;max-width:640px;">We use cookies and analytics to see how the site is used and to measure our ads. ' +
+      '<p style="margin:0;max-width:640px;">We\'d like to use cookies and analytics to see how the site is used and to measure our ads. ' +
       '<a href="privacy.html" style="color:#61DE2A;text-decoration:underline;">Privacy notice</a></p>' +
       '<div style="display:flex;gap:10px;">' +
       '<button type="button" data-v="denied" style="font:inherit;font-weight:600;cursor:pointer;padding:9px 16px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);">Decline</button>' +
@@ -27,8 +27,8 @@
       var v = e.target.getAttribute && e.target.getAttribute('data-v');
       if (!v) return;
       set(v);
-      // Reload when tracking has to stop (decline) or start again (accept after an earlier decline).
-      if (v === 'denied' || was === 'denied') { location.reload(); return; }
+      // Trackers only load once the choice is "granted": reload to start them (accept) or stop them (decline after accepting).
+      if (v === 'granted' || was === 'granted') { location.reload(); return; }
       bar.remove();
     });
     document.body.appendChild(bar);
