@@ -4,7 +4,7 @@
 Options -Indexes
 
 # Custom 404 page
-ErrorDocument 404 /404.html
+ErrorDocument 404 /404.php
 
 # --- Compression ---
 <IfModule mod_deflate.c>
@@ -151,3 +151,17 @@ Redirect 301 /planning-your-rubbish-removal/ /
 Redirect 301 /the-art-of-kitchen-demolition/ /
 Redirect 301 /the-art-of-recycling-bricks/ /
 Redirect 301 /thinking-local-where-actions-become-global/ /
+
+# --- Custom 404 page, served through PHP ---
+# This host replaces Apache's own error pages with a bare "404 Not Found"
+# (ErrorDocument above is ignored) but passes PHP error responses through, so
+# missing files are routed to 404.php, which returns the real 404 page with a
+# 404 status. Paths ending in "/" are skipped so the legacy Redirect 301 rules
+# above (all trailing-slash paths) keep working; /lib/ keeps its 403.
+<IfModule mod_rewrite.c>
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{REQUEST_URI} !^/(lib|\.well-known)/
+  RewriteRule ^ /404.php [L]
+</IfModule>
