@@ -130,6 +130,27 @@ function md_walk($node, $baseUrl) {
             case 'br':
                 $out .= "\n";
                 break;
+            // Price list rows (<dt>label<small>note</small></dt><dd>$price</dd>)
+            // become "- label (note): $price" so the price can't run into the label.
+            case 'dt':
+                $out .= '- ' . md_text(md_walk($child, $baseUrl));
+                break;
+            case 'dd':
+                $out .= ': ' . md_text(md_walk($child, $baseUrl)) . "\n";
+                break;
+            case 'small':
+                $out .= ' (' . md_text($child->textContent) . ')';
+                break;
+            // FAQ accordion questions: a heading, minus the "Learn more" toggle label.
+            case 'button':
+                if (in_array('faq-q', $classList, true)) {
+                    $q = '';
+                    foreach ($child->childNodes as $n) {
+                        if ($n->nodeType === XML_TEXT_NODE) $q .= $n->nodeValue;
+                    }
+                    $out .= "\n\n### " . md_text($q) . "\n\n";
+                }
+                break;
             default:
                 $out .= md_walk($child, $baseUrl);
         }
